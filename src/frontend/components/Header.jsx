@@ -30,6 +30,8 @@ import {
 import { BiBell } from "react-icons/bi";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features";
 
 const LinkItems = [
 	{ name: "user Feed", icon: FiHome, Link: "/userFeed" },
@@ -39,7 +41,7 @@ const LinkItems = [
 	{ name: "Profile", icon: FiUser, Link: "/profile" },
 ];
 
-function Header({ children }) {
+function Header() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	return (
 		<>
@@ -75,9 +77,6 @@ function Header({ children }) {
 			</Drawer>
 			{/* mobilenav */}
 			<MobileNav onOpen={onOpen} />
-			{/* <Box ml={{ base: 0, md: 60 }} p="4">
-				{children}
-			</Box> */}
 		</>
 	);
 }
@@ -147,6 +146,12 @@ const NavItem = ({ icon, children, ...rest }) => {
 
 const MobileNav = ({ onOpen, ...rest }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.auth.user);
+	const logoutHandler = () => {
+		dispatch(logout());
+		navigate("/login");
+	};
 	return (
 		<Flex
 			justifyContent={{ base: "space-between", md: "flex-end" }}
@@ -188,7 +193,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 									spacing="1px"
 									ml="2"
 								>
-									<Text fontSize="sm">Justina Clark</Text>
+									<Text fontSize="sm">{user?.username}</Text>
 								</VStack>
 								<Box display={{ base: "none", md: "flex" }}>
 									<FiChevronDown />
@@ -202,7 +207,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 							<MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
 
 							<MenuDivider />
-							<MenuItem>Sign out</MenuItem>
+							<MenuItem onClick={logoutHandler}>Logout</MenuItem>
 						</MenuList>
 					</Menu>
 				</Flex>

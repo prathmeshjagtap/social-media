@@ -1,2 +1,2 @@
 export * from "./authentication/authSlice";
-export { login } from "./authentication/authSlice";
+export { login, signup, logout } from "./authentication/authSlice";

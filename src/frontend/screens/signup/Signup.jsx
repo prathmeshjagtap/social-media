@@ -17,10 +17,34 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../../features";
+import { useDispatch, useSelector } from "react-redux";
 
 function Signup() {
-	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const error = useSelector((state) => state.auth.error);
+	const [showPassword, setShowPassword] = useState(false);
+	const [userDetail, setUserDetail] = useState({
+		firstName: "",
+		lastName: "",
+		username: "",
+		password: "",
+		email: "",
+	});
+	const handleChange = (e) => {
+		setUserDetail({
+			...userDetail,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const signupHandler = async (userDetail) => {
+		const response = await dispatch(signup(userDetail));
+		if (response?.payload.encodedToken) {
+			navigate("/");
+		}
+	};
 
 	return (
 		<Flex
@@ -48,25 +72,45 @@ function Signup() {
 						<HStack>
 							<Box>
 								<FormControl id="firstName" isRequired>
-									<FormLabel>First Name</FormLabel>
-									<Input type="text" />
+									<FormLabel>Name</FormLabel>
+									<Input
+										type="text"
+										name="firstName"
+										onChange={handleChange}
+										value={userDetail.firstName}
+									/>
 								</FormControl>
 							</Box>
 							<Box>
-								<FormControl id="lastName">
-									<FormLabel>Last Name</FormLabel>
-									<Input type="text" />
+								<FormControl id="lastName" isRequired>
+									<FormLabel>User Name</FormLabel>
+									<Input
+										type="text"
+										name="username"
+										onChange={handleChange}
+										value={userDetail.username}
+									/>
 								</FormControl>
 							</Box>
 						</HStack>
 						<FormControl id="email" isRequired>
 							<FormLabel>Email address</FormLabel>
-							<Input type="email" />
+							<Input
+								type="email"
+								name="email"
+								onChange={handleChange}
+								value={userDetail.email}
+							/>
 						</FormControl>
 						<FormControl id="password" isRequired>
 							<FormLabel>Password</FormLabel>
 							<InputGroup>
-								<Input type={showPassword ? "text" : "password"} />
+								<Input
+									type={showPassword ? "text" : "password"}
+									name="password"
+									onChange={handleChange}
+									value={userDetail.password}
+								/>
 								<InputRightElement h={"full"}>
 									<Button
 										variant={"ghost"}
@@ -79,6 +123,7 @@ function Signup() {
 								</InputRightElement>
 							</InputGroup>
 						</FormControl>
+						{error && <Text color={"red"}>{error}</Text>}
 						<Stack spacing={10} pt={2}>
 							<Button
 								loadingText="Submitting"
@@ -88,6 +133,7 @@ function Signup() {
 								_hover={{
 									bg: "blue.500",
 								}}
+								onClick={() => signupHandler(userDetail)}
 							>
 								Sign up
 							</Button>

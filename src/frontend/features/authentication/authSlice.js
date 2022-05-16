@@ -24,12 +24,11 @@ const login = createAsyncThunk(
 );
 
 const signup = createAsyncThunk(
-	"/auth/login",
-	async ({ username, password }, { rejectWithValue }) => {
+	"/auth/signup",
+	async (userdata, { rejectWithValue }) => {
 		try {
 			const response = await axios.post(`/api/auth/signup`, {
-				username,
-				password,
+				...userdata,
 			});
 			return response.data;
 		} catch (error) {
@@ -40,7 +39,13 @@ const signup = createAsyncThunk(
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
-	reducers: {},
+	reducers: {
+		logout: (state) => {
+			state.token = "";
+			state.user = null;
+			localStorage.removeItem("token");
+		},
+	},
 	extraReducers: {
 		[login.pending]: (state) => {
 			state.status = "loading";
@@ -48,9 +53,25 @@ const authSlice = createSlice({
 		[login.fulfilled]: (state, { payload }) => {
 			state.token = payload.encodedToken;
 			state.status = "success";
+			state.user = payload.foundUser;
 			localStorage.setItem("token", payload.encodedToken);
 		},
 		[login.rejected]: (state, { payload }) => {
+			state.status = "rejected";
+			state.error = payload.errors;
+		},
+
+		[signup.pending]: (state) => {
+			state.status = "loading";
+		},
+		[signup.fulfilled]: (state, { payload }) => {
+			state.token = payload.encodedToken;
+			state.status = "success";
+			state.user = payload.createdUser;
+
+			localStorage.setItem("token", payload.encodedToken);
+		},
+		[signup.rejected]: (state, { payload }) => {
 			state.status = "rejected";
 			state.error = payload.errors;
 		},
@@ -58,4 +79,5 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export { login };
+export { login, signup };
+export const { logout } = authSlice.actions;
