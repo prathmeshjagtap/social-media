@@ -15,12 +15,13 @@ import {
 	InputGroup,
 	InputRightElement,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features";
 
 function Login() {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
@@ -37,10 +38,11 @@ function Login() {
 		});
 	};
 
+	let from = location.state?.from?.pathname || "/userFeed";
 	const loginHandler = async (username, password) => {
 		const response = await dispatch(login({ username, password }));
 		if (response?.payload.encodedToken) {
-			navigate("/");
+			navigate(from, { replace: true });
 		}
 	};
 	return (
