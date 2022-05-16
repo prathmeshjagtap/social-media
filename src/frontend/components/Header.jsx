@@ -44,24 +44,7 @@ const LinkItems = [
 function Header() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	return (
-		<>
-			<Box
-				w={{ base: "full", md: 60 }}
-				pos="fixed"
-				top="0"
-				bg={useColorModeValue("gray.100", "gray.900")}
-			>
-				<Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-					<Text
-						fontSize="2xl"
-						fontFamily="monospace"
-						fontWeight="bold"
-						display={{ base: "none", md: "block" }}
-					>
-						Logo
-					</Text>
-				</Flex>
-			</Box>
+		<Box position="sticky" top="0" left="0">
 			<Drawer
 				autoFocus={false}
 				isOpen={isOpen}
@@ -77,7 +60,7 @@ function Header() {
 			</Drawer>
 			{/* mobilenav */}
 			<MobileNav onOpen={onOpen} />
-		</>
+		</Box>
 	);
 }
 
@@ -90,7 +73,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			borderRight="1px"
 			borderRightColor={useColorModeValue("gray.200", "gray.700")}
 			w={{ base: "full", md: 60 }}
-			pos="fixed"
+			pos="sticky"
 			top="0"
 			h="full"
 			{...rest}
@@ -154,7 +137,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 	};
 	return (
 		<Flex
-			justifyContent={{ base: "space-between", md: "flex-end" }}
+			justifyContent="space-between"
 			alignItems="center"
 			px={{ base: 4, md: 4 }}
 			height="20"
@@ -163,55 +146,72 @@ const MobileNav = ({ onOpen, ...rest }) => {
 			{...rest}
 			bg={useColorModeValue("gray.100", "gray.900")}
 		>
-			<IconButton
-				display={{ base: "flex", md: "none" }}
-				onClick={onOpen}
-				variant="outline"
-				aria-label="open menu"
-				icon={<FiMenu />}
-			/>
+			<Text
+				fontSize="2xl"
+				fontFamily="monospace"
+				fontWeight="bold"
+				display={{ base: "none", md: "block" }}
+				ml="4"
+			>
+				Logo
+			</Text>
+			<Flex
+				justifyContent="space-between"
+				w={{ base: "100%", md: "fit-content" }}
+				alignItems="center"
+			>
+				<IconButton
+					display={{ base: "flex", md: "none" }}
+					onClick={onOpen}
+					variant="outline"
+					aria-label="open menu"
+					icon={<FiMenu />}
+				/>
 
-			<HStack spacing={{ base: "0", md: "6" }}>
-				<ColorModeSwitcher mr="4" />
-				<Flex alignItems={"center"}>
-					<Menu>
-						<MenuButton
-							py={2}
-							transition="all 0.3s"
-							_focus={{ boxShadow: "none" }}
-						>
-							<HStack>
-								<Avatar
-									size={"sm"}
-									src={
-										"https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-									}
-								/>
-								<VStack
-									display={{ base: "none", md: "flex" }}
-									alignItems="flex-start"
-									spacing="1px"
-									ml="2"
-								>
-									<Text fontSize="sm">{user?.username}</Text>
-								</VStack>
-								<Box display={{ base: "none", md: "flex" }}>
-									<FiChevronDown />
-								</Box>
-							</HStack>
-						</MenuButton>
-						<MenuList
-							bg={useColorModeValue("white", "gray.900")}
-							borderColor={useColorModeValue("gray.200", "gray.700")}
-						>
-							<MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
+				<HStack spacing={{ base: "0", md: "6" }}>
+					<ColorModeSwitcher mr="4" />
+					<Flex alignItems={"center"}>
+						<Menu>
+							<MenuButton
+								py={2}
+								transition="all 0.3s"
+								_focus={{ boxShadow: "none" }}
+							>
+								<HStack>
+									<Avatar
+										size={"sm"}
+										src={
+											"https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+										}
+									/>
+									<VStack
+										display={{ base: "none", md: "flex" }}
+										alignItems="flex-start"
+										spacing="1px"
+										ml="2"
+									>
+										<Text fontSize="sm">{user?.username}</Text>
+									</VStack>
+									<Box display={{ base: "none", md: "flex" }}>
+										<FiChevronDown />
+									</Box>
+								</HStack>
+							</MenuButton>
+							<MenuList
+								bg={useColorModeValue("white", "gray.900")}
+								borderColor={useColorModeValue("gray.200", "gray.700")}
+							>
+								<MenuItem onClick={() => navigate("/profile")}>
+									Profile
+								</MenuItem>
 
-							<MenuDivider />
-							<MenuItem onClick={logoutHandler}>Logout</MenuItem>
-						</MenuList>
-					</Menu>
-				</Flex>
-			</HStack>
+								<MenuDivider />
+								<MenuItem onClick={logoutHandler}>Logout</MenuItem>
+							</MenuList>
+						</Menu>
+					</Flex>
+				</HStack>
+			</Flex>
 		</Flex>
 	);
 };
