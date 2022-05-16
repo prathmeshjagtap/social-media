@@ -42,8 +42,13 @@ const LinkItems = [
 function Header({ children }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	return (
-		<Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
-			<Box w={{ base: "full", md: 60 }} pos="fixed">
+		<>
+			<Box
+				w={{ base: "full", md: 60 }}
+				pos="fixed"
+				top="0"
+				bg={useColorModeValue("gray.100", "gray.900")}
+			>
 				<Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
 					<Text
 						fontSize="2xl"
@@ -70,10 +75,10 @@ function Header({ children }) {
 			</Drawer>
 			{/* mobilenav */}
 			<MobileNav onOpen={onOpen} />
-			<Box ml={{ base: 0, md: 60 }} p="4">
+			{/* <Box ml={{ base: 0, md: 60 }} p="4">
 				{children}
-			</Box>
-		</Box>
+			</Box> */}
+		</>
 	);
 }
 
@@ -87,6 +92,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			borderRightColor={useColorModeValue("gray.200", "gray.700")}
 			w={{ base: "full", md: 60 }}
 			pos="fixed"
+			top="0"
 			h="full"
 			{...rest}
 		>
@@ -143,14 +149,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
 	const navigate = useNavigate();
 	return (
 		<Flex
+			justifyContent={{ base: "space-between", md: "flex-end" }}
+			alignItems="center"
 			px={{ base: 4, md: 4 }}
 			height="20"
-			alignItems="center"
-			bg={useColorModeValue("white", "gray.900")}
 			borderBottomWidth="1px"
 			borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-			justifyContent={{ base: "space-between", md: "flex-end" }}
 			{...rest}
+			bg={useColorModeValue("gray.100", "gray.900")}
 		>
 			<IconButton
 				display={{ base: "flex", md: "none" }}
@@ -159,15 +165,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
 				aria-label="open menu"
 				icon={<FiMenu />}
 			/>
-
-			<Text
-				display={{ base: "flex", md: "none" }}
-				fontSize="2xl"
-				fontFamily="monospace"
-				fontWeight="bold"
-			>
-				Logo
-			</Text>
 
 			<HStack spacing={{ base: "0", md: "6" }}>
 				<ColorModeSwitcher mr="4" />
