@@ -16,13 +16,14 @@ import {
 	Link,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { signup } from "../../features";
 import { useDispatch, useSelector } from "react-redux";
 
 function Signup() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const location = useLocation();
 	const error = useSelector((state) => state.auth.error);
 	const [showPassword, setShowPassword] = useState(false);
 	const [userDetail, setUserDetail] = useState({
@@ -38,11 +39,11 @@ function Signup() {
 			[e.target.name]: e.target.value,
 		});
 	};
-
+	let from = location.state?.from?.pathname || "/userFeed";
 	const signupHandler = async (userDetail) => {
 		const response = await dispatch(signup(userDetail));
 		if (response?.payload.encodedToken) {
-			navigate("/");
+			navigate(from, { replace: true });
 		}
 	};
 
