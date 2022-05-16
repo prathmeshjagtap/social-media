@@ -1,19 +1,26 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { ChakraProvider, theme, ColorModeScript } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./frontend/store";
+
+const root = createRoot(document.getElementById("root"));
 
 // Call make Server
 makeServer();
-
-ReactDOM.render(
+root.render(
 	<React.StrictMode>
 		<ChakraProvider theme={theme}>
 			<ColorModeScript />
-			<App />
+			<BrowserRouter>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</BrowserRouter>
 		</ChakraProvider>
-	</React.StrictMode>,
-	document.getElementById("root")
+	</React.StrictMode>
 );
