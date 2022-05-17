@@ -44,7 +44,7 @@ const LinkItems = [
 function Header() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	return (
-		<Box position="sticky" top="0" left="0">
+		<Box position="sticky" top="0" left="0" zIndex="dropdown">
 			<Drawer
 				autoFocus={false}
 				isOpen={isOpen}
@@ -167,7 +167,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
 					aria-label="open menu"
 					icon={<FiMenu />}
 				/>
-
 				<HStack spacing={{ base: "0", md: "6" }}>
 					<ColorModeSwitcher mr="4" />
 					<Flex alignItems={"center"}>
