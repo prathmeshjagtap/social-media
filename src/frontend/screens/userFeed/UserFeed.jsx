@@ -23,18 +23,23 @@ function UserFeed() {
 	return (
 		<Box>
 			<Header />
-			<Box px={{ base: "4", md: "32" }} mt="5">
-				<Flex gap={6}>
+			<Flex
+				px={{ base: "4", md: "16", lg: "28" }}
+				mt="5"
+				justifyContent="center"
+				alignItems="center"
+			>
+				<Flex gap={4}>
 					<Box
 						position="sticky"
 						top="100px"
-						minW="300px"
+						minW="250px"
 						h="fit-content"
 						display={{ base: "none", lg: "block" }}
 					>
 						<SideBar />
 					</Box>
-					<Box width="100%" bg="blackAlpha.100" p="4">
+					<Box width="100%" bg="blackAlpha.100" p="4" maxW="700px">
 						<Box p="4" boxShadow="xl">
 							<Flex gap="2">
 								<Avatar
@@ -119,7 +124,7 @@ function UserFeed() {
 						top="100px"
 						minW="300px"
 						h="fit-content"
-						display={{ base: "none", lg: "block" }}
+						display={{ base: "none", md: "none", lg: "none", xl: "block" }}
 						p="2"
 					>
 						<Flex alignItems="center" border="2px">
@@ -172,7 +177,7 @@ function UserFeed() {
 						</Box>
 					</Box>
 				</Flex>
-			</Box>
+			</Flex>
 		</Box>
 	);
 }
