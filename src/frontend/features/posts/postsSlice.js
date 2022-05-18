@@ -7,6 +7,7 @@ const initialState = {
 	error: "",
 	singlePostStatus: "idle",
 	singlePost: null,
+	userPost: null,
 };
 
 const getAllPosts = createAsyncThunk("/posts/getAllPosts ", async () => {
@@ -17,6 +18,40 @@ const getSinglePost = createAsyncThunk(
 	"/posts/getSinglePost ",
 	async (postId) => {
 		const { data } = await axios.get(`/api/posts/${postId}`);
+		return data;
+	}
+);
+
+const addPost = createAsyncThunk(
+	"/posts/addPost ",
+	async ({ token, postData }) => {
+		const { data } = await axios.post(
+			"/api/posts",
+			{ postData },
+			{ headers: { authorization: token } }
+		);
+		return data;
+	}
+);
+
+const editPost = createAsyncThunk(
+	"/posts/editPost ",
+	async ({ token, postId, postData }) => {
+		const { data } = await axios.post(
+			`/api/posts/edit/${postId}`,
+			{ postData },
+			{ headers: { authorization: token } }
+		);
+		return data;
+	}
+);
+
+const deletePost = createAsyncThunk(
+	"/posts/deletePost ",
+	async ({ token, postId }) => {
+		const { data } = await axios.post(`/api/posts/edit/${postId}`, {
+			headers: { authorization: token },
+		});
 		return data;
 	}
 );
@@ -53,9 +88,34 @@ const postsSlice = createSlice({
 			state.error = error.message;
 			state.singlePostStatus = "failed";
 		});
+
+		builder.addCase(addPost.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+			state.status = "success";
+		});
+		builder.addCase(addPost.rejected, (state, { error }) => {
+			state.status = "failed";
+			state.error = error.message;
+		});
+		builder.addCase(editPost.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+			state.status = "success";
+		});
+		builder.addCase(editPost.rejected, (state, { error }) => {
+			state.status = "failed";
+			state.error = error.message;
+		});
+		builder.addCase(deletePost.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+			state.status = "success";
+		});
+		builder.addCase(deletePost.rejected, (state, { error }) => {
+			state.status = "failed";
+			state.error = error.message;
+		});
 	},
 });
 
-export { getAllPosts, getSinglePost };
+export { getAllPosts, getSinglePost, addPost, editPost };
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost } = postsSlice.actions;

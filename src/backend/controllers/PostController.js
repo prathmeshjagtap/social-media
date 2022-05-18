@@ -86,9 +86,13 @@ export const createPostHandler = function (schema, request) {
 				likedBy: [],
 				dislikedBy: [],
 			},
-			username: user.username,
 			createdAt: formatDate(),
 			updatedAt: formatDate(),
+			username: user.username,
+			firstname: user.firstName,
+			lastname: user.lastName,
+			avatarURL: user.avatarURL,
+			comments: [],
 		};
 		this.db.posts.insert(post);
 		return new Response(201, {}, { posts: this.db.posts });
