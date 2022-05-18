@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Posts } from "../../components";
+import { Loader, Posts } from "../../components";
 import {
 	Box,
 	Flex,
@@ -8,7 +8,6 @@ import {
 	Text,
 	Icon,
 	Button,
-	Spinner,
 } from "@chakra-ui/react";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,35 +21,6 @@ function UserFeed() {
 			dispatch(getAllPosts());
 		}
 	}, [dispatch, status]);
-
-	let content;
-	if (status === "loading") {
-		content = (
-			<Flex
-				alignItems="center"
-				justifyContent="center"
-				minH="100px"
-				mt="5"
-				p="4"
-			>
-				<Spinner
-					thickness="4px"
-					speed="0.65s"
-					emptyColor="gray.200"
-					color="blue.500"
-					size="xl"
-				/>
-			</Flex>
-		);
-	} else if (status === "success") {
-		content = posts.map((post) => <Posts key={post.id} post={post} />);
-	} else if (status === "failed") {
-		content = (
-			<Text mt="5" textAlign="center" color="red.500" p="4">
-				Server Error Failed to load The data
-			</Text>
-		);
-	}
 
 	return (
 		<Box p="4" boxShadow="xl">
@@ -80,7 +50,14 @@ function UserFeed() {
 					</Flex>
 				</Box>
 			</Flex>
-			{content}
+			{status === "loading" && <Loader />}
+			{status === "success" &&
+				posts.map((post) => <Posts key={post.id} post={post} />)}
+			{status === "failed" && (
+				<Text mt="5" textAlign="center" color="red.500" p="4">
+					Server Error Failed to load The data
+				</Text>
+			)}
 		</Box>
 	);
 }

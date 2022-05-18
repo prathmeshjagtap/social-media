@@ -37,7 +37,7 @@ function AllRoutes() {
 						element={<PageContainer page={<Explore />} />}
 					/>
 					<Route
-						path="/post/:postID"
+						path="/post/:postId"
 						element={<PageContainer page={<SinglePost />} />}
 					/>
 					<Route path="*" element={<PageNotFound />} />

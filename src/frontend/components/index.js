@@ -4,3 +4,4 @@ export { SideBar } from "./SideBar";
 export { Posts } from "./Posts";
 export { RightSideBar } from "./RightSideBar";
 export { PageContainer } from "./PageContainer";
+export { Loader } from "./Loader";
