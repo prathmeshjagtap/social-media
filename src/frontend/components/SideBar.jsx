@@ -23,7 +23,15 @@ const LinkItems = [
 function SideBar() {
 	const navigate = useNavigate();
 	return (
-		<Box minH="85vh" bg={useColorModeValue("gray.100", "gray.900")}>
+		<Box
+			minH="85vh"
+			bg={useColorModeValue("gray.100", "gray.900")}
+			position="sticky"
+			top="100px"
+			minW="250px"
+			h="fit-content"
+			display={{ base: "none", lg: "block" }}
+		>
 			<Box p="2">
 				{LinkItems.map((link) => (
 					<NavItem

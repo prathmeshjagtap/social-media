@@ -1,7 +1,8 @@
 import React from "react";
+import { Box } from "@chakra-ui/react";
 
 function Profile() {
-	return <div>Profile page</div>;
+	return <Box>Profile page</Box>;
 }
 
 export { Profile };
