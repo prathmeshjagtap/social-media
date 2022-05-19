@@ -9,19 +9,37 @@ import {
 	Signup,
 	Explore,
 	PageNotFound,
+	SinglePost,
 } from "../screens";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { GuestRoute } from "./GuestRoute";
+import { PageContainer } from "../components";
 
 function AllRoutes() {
 	return (
 		<div>
 			<Routes>
 				<Route element={<ProtectedRoute />}>
-					<Route path="/bookmarks" element={<Bookmarks />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/userFeed" element={<UserFeed />} />
-					<Route path="/explore" element={<Explore />} />
+					<Route
+						path="/bookmarks"
+						element={<PageContainer page={<Bookmarks />} />}
+					/>
+					<Route
+						path="/profile"
+						element={<PageContainer page={<Profile />} />}
+					/>
+					<Route
+						path="/userFeed"
+						element={<PageContainer page={<UserFeed />} />}
+					/>
+					<Route
+						path="/explore"
+						element={<PageContainer page={<Explore />} />}
+					/>
+					<Route
+						path="/post/:postId"
+						element={<PageContainer page={<SinglePost />} />}
+					/>
 					<Route path="*" element={<PageNotFound />} />
 				</Route>
 				<Route element={<GuestRoute />}>

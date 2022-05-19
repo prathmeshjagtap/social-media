@@ -5,4 +5,5 @@ export { Login } from "./login/Login";
 export { Signup } from "./signup/Signup";
 export { Profile } from "./profile/Profile";
 export { UserFeed } from "./userFeed/UserFeed";
+export { SinglePost } from "./singlePost/SinglePost";
 export { PageNotFound } from "./pageNotFound/PageNotFound";
