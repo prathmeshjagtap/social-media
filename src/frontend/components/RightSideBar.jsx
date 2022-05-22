@@ -3,6 +3,7 @@ import { BiSearch } from "react-icons/bi";
 import { Input, Text, Button, Box, Flex, Avatar, Icon } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features";
+import { Link } from "react-router-dom";
 
 function RightSideBar() {
 	const dispatch = useDispatch();
@@ -38,23 +39,34 @@ function RightSideBar() {
 			</Flex>
 			{allusers?.map((user) => {
 				return (
-					<Box p="2" mt="4" key={user?._id}>
-						<Flex gap="2" justifyContent="space-between">
-							<Flex alignItems="center" gap="1">
-								<Avatar size="sm" name="Kola Tioluwani" src={user?.avatarURL} />
-								<Box>
-									<Text>
-										{user?.firstName} {user?.lastName}
-									</Text>
-									<Text>@{user?.username}</Text>
-								</Box>
-							</Flex>
+					<Link to={`/profile/${user?.username}`}>
+						<Box p="2" mt="4" key={user?._id}>
+							<Flex gap="2" justifyContent="space-between">
+								<Flex alignItems="center" gap="1">
+									<Avatar
+										size="sm"
+										name="Kola Tioluwani"
+										src={user?.avatarURL}
+									/>
+									<Box>
+										<Text>
+											{user?.firstName} {user?.lastName}
+										</Text>
+										<Text>@{user?.username}</Text>
+									</Box>
+								</Flex>
 
-							<Button ml="4" size="xs" justifySelf="end">
-								Follow +
-							</Button>
-						</Flex>
-					</Box>
+								<Button
+									ml="4"
+									size="xs"
+									justifySelf="end"
+									onClick={(e) => e.stopPropagation()}
+								>
+									Follow +
+								</Button>
+							</Flex>
+						</Box>
+					</Link>
 				);
 			})}
 		</Box>

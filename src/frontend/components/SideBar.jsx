@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FiHome, FiCompass, FiStar, FiUser } from "react-icons/fi";
 import { BiBell } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AddPost } from "./AddPost";
 import { useSelector } from "react-redux";
 
@@ -73,19 +73,19 @@ function SideBar() {
 						</Button>
 					</Box>
 				</Box>
-				<Box px="6" position="absolute" bottom="4" w="100%">
-					<Flex gap="2" alignItems="center">
-						<Avatar
-							size="sm"
-							name="Kola Tioluwani"
-							src="https://bit.ly/tioluwani-kolawole"
-						/>
-						<Box>
-							<Text>Prathmesh Jagtap</Text>
-							<Text>@prathmesh</Text>
-						</Box>
-					</Flex>
-				</Box>
+				<Link to={`/profile/${user?.username}`}>
+					<Box px="6" position="absolute" bottom="4" w="100%" pointer="cursor">
+						<Flex gap="2" alignItems="center">
+							<Avatar size="sm" name={user?.username} src={user?.avatarURL} />
+							<Box>
+								<Text>
+									{user?.firstName} {user?.lastName}
+								</Text>
+								<Text>@{user?.username}</Text>
+							</Box>
+						</Flex>
+					</Box>
+				</Link>
 			</Box>
 			<Modal
 				initialFocusRef={initialRef}
