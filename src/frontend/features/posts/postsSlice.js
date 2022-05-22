@@ -116,6 +116,6 @@ const postsSlice = createSlice({
 	},
 });
 
-export { getAllPosts, getSinglePost, addPost, editPost };
+export { getAllPosts, getSinglePost, addPost, editPost, deletePost };
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost } = postsSlice.actions;

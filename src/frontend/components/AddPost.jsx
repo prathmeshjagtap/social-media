@@ -14,7 +14,7 @@ import { addPost } from "../features";
 
 function AddPost({ close }) {
 	const dispatch = useDispatch();
-	const { token } = useSelector((state) => state.auth);
+	const { token, user } = useSelector((state) => state.auth);
 	const [createPost, setCreatePost] = useState({
 		content: "",
 	});
@@ -38,11 +38,7 @@ function AddPost({ close }) {
 	};
 	return (
 		<Flex gap="2" p="4">
-			<Avatar
-				size="sm"
-				name="Kola Tioluwani"
-				src="https://bit.ly/tioluwani-kolawole"
-			/>
+			<Avatar size="sm" name={user?.username} src={user?.avatarURL} />
 			<Box w="100%">
 				<Textarea
 					resize="none"

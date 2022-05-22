@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Input, Text, Button, Box, Flex, Avatar, Icon } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../features";
 
 function RightSideBar() {
+	const dispatch = useDispatch();
+	const allusers = useSelector((state) => state.user.allusers);
+	useEffect(() => {
+		dispatch(getAllUsers());
+	}, [dispatch]);
+
 	return (
 		<Box
 			position="sticky"
@@ -28,38 +36,27 @@ function RightSideBar() {
 					focusBorderColor="transparent"
 				/>
 			</Flex>
-			<Box p="2" mt="4">
-				<Flex gap="2" alignItems="center">
-					<Avatar
-						size="sm"
-						name="Kola Tioluwani"
-						src="https://bit.ly/tioluwani-kolawole"
-					/>
-					<Box>
-						<Text>Prathmesh Jagtap</Text>
-						<Text>@prathmesh</Text>
+			{allusers?.map((user) => {
+				return (
+					<Box p="2" mt="4" key={user?._id}>
+						<Flex gap="2" justifyContent="space-between">
+							<Flex alignItems="center" gap="1">
+								<Avatar size="sm" name="Kola Tioluwani" src={user?.avatarURL} />
+								<Box>
+									<Text>
+										{user?.firstName} {user?.lastName}
+									</Text>
+									<Text>@{user?.username}</Text>
+								</Box>
+							</Flex>
+
+							<Button ml="4" size="xs" justifySelf="end">
+								Follow +
+							</Button>
+						</Flex>
 					</Box>
-					<Button ml="4" size="xs">
-						Follow +
-					</Button>
-				</Flex>
-			</Box>
-			<Box p="2" mt="4">
-				<Flex gap="2" alignItems="center">
-					<Avatar
-						size="sm"
-						name="Kola Tioluwani"
-						src="https://bit.ly/tioluwani-kolawole"
-					/>
-					<Box>
-						<Text>Prathmesh Jagtap</Text>
-						<Text>@prathmesh</Text>
-					</Box>
-					<Button ml="4" size="xs">
-						Follow +
-					</Button>
-				</Flex>
-			</Box>
+				);
+			})}
 		</Box>
 	);
 }

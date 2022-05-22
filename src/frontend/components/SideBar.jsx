@@ -19,14 +19,7 @@ import { FiHome, FiCompass, FiStar, FiUser } from "react-icons/fi";
 import { BiBell } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { AddPost } from "./AddPost";
-
-const LinkItems = [
-	{ name: "UserFeed", icon: FiHome, Link: "/userFeed" },
-	{ name: "Explore", icon: FiCompass, Link: "/explore" },
-	{ name: "Bookmarks", icon: FiStar, Link: "/bookmarks" },
-	{ name: "Notifcation", icon: BiBell, Link: "/notification" },
-	{ name: "Profile", icon: FiUser, Link: "/profile" },
-];
+import { useSelector } from "react-redux";
 
 function SideBar() {
 	const navigate = useNavigate();
@@ -35,7 +28,15 @@ function SideBar() {
 
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
+	const user = useSelector((state) => state.auth.user);
 
+	const LinkItems = [
+		{ name: "UserFeed", icon: FiHome, Link: "/userFeed" },
+		{ name: "Explore", icon: FiCompass, Link: "/explore" },
+		{ name: "Bookmarks", icon: FiStar, Link: "/bookmarks" },
+		{ name: "Notifcation", icon: BiBell, Link: "/notification" },
+		{ name: "Profile", icon: FiUser, Link: `/profile/${user?.username}` },
+	];
 	return (
 		<>
 			<Box

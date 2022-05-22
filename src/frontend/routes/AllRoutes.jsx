@@ -25,7 +25,7 @@ function AllRoutes() {
 						element={<PageContainer page={<Bookmarks />} />}
 					/>
 					<Route
-						path="/profile"
+						path="/profile/:username"
 						element={<PageContainer page={<Profile />} />}
 					/>
 					<Route

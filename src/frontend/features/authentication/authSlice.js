@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
 	token: localStorage.getItem("token") ?? null,
-	user: null,
+	user: JSON.parse(localStorage.getItem("user")) || null,
 	status: null,
 	error: null,
 };
@@ -44,6 +44,7 @@ const authSlice = createSlice({
 			state.token = "";
 			state.user = null;
 			localStorage.removeItem("token");
+			localStorage.removeItem("user");
 		},
 	},
 	extraReducers: {
@@ -55,6 +56,7 @@ const authSlice = createSlice({
 			state.status = "success";
 			state.user = payload.foundUser;
 			localStorage.setItem("token", payload.encodedToken);
+			localStorage.setItem("user", JSON.stringify(state.user));
 		},
 		[login.rejected]: (state, { payload }) => {
 			state.status = "rejected";
@@ -68,8 +70,8 @@ const authSlice = createSlice({
 			state.token = payload.encodedToken;
 			state.status = "success";
 			state.user = payload.createdUser;
-
 			localStorage.setItem("token", payload.encodedToken);
+			localStorage.setItem("user", JSON.stringify(state.user));
 		},
 		[signup.rejected]: (state, { payload }) => {
 			state.status = "rejected";

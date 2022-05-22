@@ -9,53 +9,44 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
 	{
 		_id: uuid(),
+		firstName: "Prathmesh",
+		lastName: "Jagtap",
+		username: "prathmesh",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
 		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+			"Day 119-120/ #151daysofcode 1)Attended Redux Lecture 2) Implemented auth functionality in social Media with Redux #webdevelopment  #100DaysOfCode",
 		likes: {
 			likeCount: 2,
 			likedBy: [
 				{
-					username: "ram",
-					firstname: "ram",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Elon",
+					lastName: "Musk",
+					username: "elonmusk",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				},
 				{
-					username: "sham",
-					firstname: "sham",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
-		firstname: "Prathmesh",
-		lastname: "lastname",
-		avatarURL:
-			"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
-				text: "Interesting",
+				username: "messi",
+				text: "Bro this is cool",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-				votes: {
-					upvotedBy: [],
-					downvotedBy: [],
-				},
-			},
-			{
-				_id: uuid(),
-				username: "sohamshah",
-				text: "Wow!",
-				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
@@ -65,53 +56,90 @@ export const posts = [
 	},
 	{
 		_id: uuid(),
-		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+		firstName: "Elon",
+		lastName: "Musk",
+		username: "elonmusk",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		content: "I am still not rich than Richie Rich",
 		likes: {
 			likeCount: 2,
 			likedBy: [
 				{
-					username: "ram",
-					firstname: "ram",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				},
 				{
-					username: "sham",
-					firstname: "sham",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Prathmesh",
+					lastName: "Jagtap",
+					username: "prathmesh",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
-		firstname: "Prathmesh",
-		lastname: "lastname",
-		avatarURL:
-			"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
-				text: "Interesting",
+				username: "prathmesh",
+				text: "lol",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
 				},
 			},
+		],
+	},
+
+	{
+		_id: uuid(),
+		firstName: "Prathmesh",
+		lastName: "Jagtap",
+		username: "prathmesh",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		content: "@elonmush can i join twitter",
+		likes: {
+			likeCount: 2,
+			likedBy: [
+				{
+					_id: uuid(),
+					firstName: "Elon",
+					lastName: "Musk",
+					username: "elonmusk",
+					avatarURL:
+						"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
+				},
+				{
+					_id: uuid(),
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
+					avatarURL:
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
+				},
+			],
+			dislikedBy: [],
+		},
+		comments: [
 			{
 				_id: uuid(),
-				username: "sohamshah",
-				text: "Wow!",
+				username: "elonmusk",
+				text: "Bro I am gonna get you into Twitter",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
@@ -121,53 +149,43 @@ export const posts = [
 	},
 	{
 		_id: uuid(),
-		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+		firstName: "Elon",
+		lastName: "Musk",
+		username: "elonmusk",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		content: "next i am gonna  buy spotify and make it free",
 		likes: {
 			likeCount: 2,
 			likedBy: [
 				{
-					username: "ram",
-					firstname: "ram",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				},
 				{
-					username: "sham",
-					firstname: "sham",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Prathmesh",
+					lastName: "Jagtap",
+					username: "prathmesh",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
-		firstname: "Prathmesh",
-		lastname: "lastname",
-		avatarURL:
-			"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
-				text: "Interesting",
+				username: "prathmesh",
+				text: "You are legend",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-				votes: {
-					upvotedBy: [],
-					downvotedBy: [],
-				},
-			},
-			{
-				_id: uuid(),
-				username: "sohamshah",
-				text: "Wow!",
-				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
@@ -177,53 +195,43 @@ export const posts = [
 	},
 	{
 		_id: uuid(),
-		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+		firstName: "Prathmesh",
+		lastName: "Jagtap",
+		username: "prathmesh",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		content: "Damn i need that edit button",
 		likes: {
 			likeCount: 2,
 			likedBy: [
 				{
-					username: "ram",
-					firstname: "ram",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Elon",
+					lastName: "Musk",
+					username: "elonmusk",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				},
 				{
-					username: "sham",
-					firstname: "sham",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
-		firstname: "Prathmesh",
-		lastname: "lastname",
-		avatarURL:
-			"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
-				text: "Interesting",
+				username: "elonmusk",
+				text: "Yes its comming soon",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-				votes: {
-					upvotedBy: [],
-					downvotedBy: [],
-				},
-			},
-			{
-				_id: uuid(),
-				username: "sohamshah",
-				text: "Wow!",
-				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
@@ -232,54 +240,43 @@ export const posts = [
 		],
 	},
 	{
-		_id: uuid(),
-		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+		firstName: "Leo",
+		lastName: "Messi",
+		username: "messi",
+		avatarURL:
+			"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		content: "Gonna join Manchester United",
 		likes: {
 			likeCount: 2,
 			likedBy: [
 				{
-					username: "ram",
-					firstname: "ram",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Elon",
+					lastName: "Musk",
+					username: "elonmusk",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				},
 				{
-					username: "sham",
-					firstname: "sham",
-					lastname: "lastname",
+					_id: uuid(),
+					firstName: "Prathmesh",
+					lastName: "Jagtap",
+					username: "prathmesh",
 					avatarURL:
-						"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+						"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
-		firstname: "Prathmesh",
-		lastname: "lastname",
-		avatarURL:
-			"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
-				text: "Interesting",
+				username: "elonmusk",
+				text: "2 goats ",
 				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
-				votes: {
-					upvotedBy: [],
-					downvotedBy: [],
-				},
-			},
-			{
-				_id: uuid(),
-				username: "sohamshah",
-				text: "Wow!",
-				avatarURL:
-					"https://res.cloudinary.com/dodkrr6ce/image/upload/v1652181470/socmedia/pic2_vfqvfn.jpg",
+					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
