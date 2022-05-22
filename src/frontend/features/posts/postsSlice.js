@@ -49,7 +49,7 @@ const editPost = createAsyncThunk(
 const deletePost = createAsyncThunk(
 	"/posts/deletePost ",
 	async ({ token, postId }) => {
-		const { data } = await axios.post(`/api/posts/edit/${postId}`, {
+		const { data } = await axios.delete(`/api/posts/${postId}`, {
 			headers: { authorization: token },
 		});
 		return data;

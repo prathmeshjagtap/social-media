@@ -10,14 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../features";
+import { editPost } from "../features";
 
-function AddPost({ close }) {
+function EditPost({ close, post }) {
 	const dispatch = useDispatch();
 	const { token, user } = useSelector((state) => state.auth);
-	const [createPost, setCreatePost] = useState({
-		content: "",
-	});
+	const [createPost, setCreatePost] = useState(post);
 	const { onClose } = useDisclosure();
 	const handleChange = (e) => {
 		setCreatePost({
@@ -26,12 +24,11 @@ function AddPost({ close }) {
 		});
 	};
 
-	const addpost = (token, postData) => {
+	const editpost = (token, postId, postData) => {
 		if (createPost.content !== "") {
-			dispatch(addPost({ token, postData }));
+			dispatch(editPost({ token, postId, postData }));
 		}
 		onClose();
-		setCreatePost({ content: "" });
 		if (close) {
 			close();
 		}
@@ -58,12 +55,13 @@ function AddPost({ close }) {
 						alignItems="center"
 						cursor="pointer"
 					/>
-
-					<Button onClick={() => addpost(token, createPost)}>Post</Button>
+					<Button onClick={() => editpost(token, post?._id, createPost)}>
+						Update Post
+					</Button>
 				</Flex>
 			</Box>
 		</Flex>
 	);
 }
 
-export { AddPost };
+export { EditPost };

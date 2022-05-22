@@ -70,11 +70,12 @@ function ProfileHeader() {
 						>
 							{user?.userBio}
 						</Text>
-						<Link href={"#"} color={"blue.400"}>
+						<Link href={user?.userWebsite} color={"blue.400"} target="_blank">
 							{user?.userWebsite}
 						</Link>
 						<Flex>
-							<Text>12 Followers</Text>
+							<Text>{user?.followers?.length} Followers</Text>
+							<Text>{user?.following?.length} Following</Text>
 						</Flex>
 					</Flex>
 				</Box>

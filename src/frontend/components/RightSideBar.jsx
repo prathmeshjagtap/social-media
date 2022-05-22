@@ -39,7 +39,7 @@ function RightSideBar() {
 			</Flex>
 			{allusers?.map((user) => {
 				return (
-					<Link to={`/profile/${user?.username}`}>
+					<Link to={`/profile/${user?.username}`} key={user?._id}>
 						<Box p="2" mt="4" key={user?._id}>
 							<Flex gap="2" justifyContent="space-between">
 								<Flex alignItems="center" gap="1">
