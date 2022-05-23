@@ -49,7 +49,7 @@ const editPost = createAsyncThunk(
 const deletePost = createAsyncThunk(
 	"/posts/deletePost ",
 	async ({ token, postId }) => {
-		const { data } = await axios.post(`/api/posts/edit/${postId}`, {
+		const { data } = await axios.delete(`/api/posts/${postId}`, {
 			headers: { authorization: token },
 		});
 		return data;
@@ -116,6 +116,6 @@ const postsSlice = createSlice({
 	},
 });
 
-export { getAllPosts, getSinglePost, addPost, editPost };
+export { getAllPosts, getSinglePost, addPost, editPost, deletePost };
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost } = postsSlice.actions;

@@ -6,3 +6,4 @@ export { RightSideBar } from "./RightSideBar";
 export { PageContainer } from "./PageContainer";
 export { Loader } from "./Loader";
 export { AddPost } from "./AddPost";
+export { EditPost } from "./EditPost";
