@@ -180,11 +180,11 @@ export const likePostHandler = function (schema, request) {
 				{ errors: ["Cannot like a post that is already liked. "] }
 			);
 		}
-		post.likes.dislikedBy = post.likes.dislikedBy.filter(
-			(currUser) => currUser._id !== user._id
-		);
+		// post.likes.dislikedBy = post.likes.dislikedBy.filter(
+		// 	(currUser) => currUser._id !== user._id
+		// );
 		post.likes.likeCount += 1;
-		post.likes.likedBy.push(user);
+		post.likes.likedBy.push({ _id: user._id, username: user.username });
 		this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
 		return new Response(201, {}, { posts: this.db.posts });
 	} catch (error) {
