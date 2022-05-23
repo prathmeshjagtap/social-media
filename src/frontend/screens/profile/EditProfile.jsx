@@ -6,7 +6,6 @@ import {
 	FormLabel,
 	Input,
 	InputGroup,
-	InputLeftAddon,
 	Textarea,
 	Button,
 	Flex,
@@ -62,13 +61,6 @@ function EditProfile({ close, user }) {
 				Website
 			</FormLabel>
 			<InputGroup size="sm">
-				<InputLeftAddon
-					bg={useColorModeValue("gray.50", "gray.800")}
-					color={useColorModeValue("gray.500", "gay.50")}
-					rounded="md"
-				>
-					http://
-				</InputLeftAddon>
 				<Input
 					type="tel"
 					placeholder="www.example.com"
