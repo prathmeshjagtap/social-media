@@ -8,6 +8,8 @@ const initialState = {
 	singlePostStatus: "idle",
 	singlePost: null,
 	userPost: null,
+	bookmarks: [],
+	bookmarksStatus: "idle",
 };
 
 const getAllPosts = createAsyncThunk("/posts/getAllPosts ", async () => {
@@ -84,6 +86,41 @@ const dislikePost = createAsyncThunk(
 	}
 );
 
+const addBookmark = createAsyncThunk(
+	"/posts/addBookmark ",
+	async ({ token, postId }) => {
+		const { data } = await axios.post(
+			`/api/users/bookmark/${postId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const deleteBookmark = createAsyncThunk(
+	"/posts/deleteBookmark ",
+	async ({ token, postId }) => {
+		const { data } = await axios.post(
+			`/api/users/remove-bookmark/${postId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
+	const { data } = await axios.get("/api/users/bookmark", {
+		headers: { authorization: token },
+	});
+	return data;
+});
+
 const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -91,6 +128,9 @@ const postsSlice = createSlice({
 		unsuscribeSinglePost: (state) => {
 			state.singlePost = null;
 			state.singlePostStatus = "idle";
+		},
+		unsuscribeBookmark: (state) => {
+			state.bookmarksStatus = "idle";
 		},
 	},
 	extraReducers: (builder) => {
@@ -154,6 +194,33 @@ const postsSlice = createSlice({
 		builder.addCase(dislikePost.rejected, (state, { error }) => {
 			state.error = error.message;
 		});
+
+		builder.addCase(getBookmarks.pending, (state, { payload }) => {
+			state.bookmarksStatus = "loading";
+		});
+
+		builder.addCase(getBookmarks.fulfilled, (state, { payload }) => {
+			state.bookmarks = payload.bookmarks;
+			state.bookmarksStatus = "success";
+		});
+		builder.addCase(getBookmarks.rejected, (state, { error }) => {
+			state.error = error.message;
+			state.bookmarksStatus = "failed";
+		});
+
+		builder.addCase(addBookmark.fulfilled, (state, { payload }) => {
+			state.bookmarks = payload.bookmarks;
+		});
+		builder.addCase(addBookmark.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+
+		builder.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
+			state.bookmarks = payload.bookmarks;
+		});
+		builder.addCase(deleteBookmark.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
 	},
 });
 
@@ -165,6 +232,9 @@ export {
 	deletePost,
 	likePost,
 	dislikePost,
+	addBookmark,
+	deleteBookmark,
+	getBookmarks,
 };
 export const postreducer = postsSlice.reducer;
-export const { unsuscribeSinglePost } = postsSlice.actions;
+export const { unsuscribeSinglePost, unsuscribeBookmark } = postsSlice.actions;

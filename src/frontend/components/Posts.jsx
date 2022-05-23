@@ -7,6 +7,7 @@ import {
 	BiDotsVerticalRounded,
 	BiEdit,
 } from "react-icons/bi";
+import { BsBookmarkFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import {
@@ -30,7 +31,13 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, likePost, dislikePost } from "../features";
+import {
+	deletePost,
+	likePost,
+	dislikePost,
+	addBookmark,
+	deleteBookmark,
+} from "../features";
 import { EditPost } from "./EditPost";
 function Posts({ post }) {
 	const navigate = useNavigate();
@@ -39,6 +46,7 @@ function Posts({ post }) {
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
 	const { user, token } = useSelector((state) => state.auth);
+	const { bookmarks } = useSelector((state) => state.posts);
 	return (
 		<Box boxShadow="xl" my="4">
 			<Flex gap="2" p="4">
@@ -136,13 +144,29 @@ function Posts({ post }) {
 							alignItems="center"
 							cursor="pointer"
 						/>
-						<Icon
-							as={BiBookmark}
-							w="6"
-							h="6"
-							alignItems="center"
-							cursor="pointer"
-						/>
+						{bookmarks.find((item) => item._id === post._id) ? (
+							<Icon
+								as={BsBookmarkFill}
+								w="6"
+								h="6"
+								alignItems="center"
+								cursor="pointer"
+								onClick={() =>
+									dispatch(deleteBookmark({ token, postId: post?._id }))
+								}
+							/>
+						) : (
+							<Icon
+								as={BiBookmark}
+								w="6"
+								h="6"
+								alignItems="center"
+								cursor="pointer"
+								onClick={() =>
+									dispatch(addBookmark({ token, postId: post?._id }))
+								}
+							/>
+						)}
 					</Flex>
 				</Box>
 			</Flex>
