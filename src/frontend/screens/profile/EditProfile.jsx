@@ -19,9 +19,10 @@ function EditProfile({ close, user }) {
 	const dispatch = useDispatch();
 	const { token } = useSelector((state) => state.auth);
 	const handleChange = (e) => {
+		const { name, value } = e.target;
 		setProfile({
 			...profile,
-			[e.target.name]: e.target.value,
+			[name]: value,
 		});
 	};
 
