@@ -56,6 +56,34 @@ const deletePost = createAsyncThunk(
 	}
 );
 
+const likePost = createAsyncThunk(
+	"/posts/likePost ",
+	async ({ token, postId }) => {
+		const { data } = await axios.post(
+			`/api/posts/like/${postId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const dislikePost = createAsyncThunk(
+	"/posts/dislikePost ",
+	async ({ token, postId }) => {
+		const { data } = await axios.post(
+			`/api/posts/dislike/${postId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
 const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -113,9 +141,30 @@ const postsSlice = createSlice({
 			state.status = "failed";
 			state.error = error.message;
 		});
+
+		builder.addCase(likePost.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(likePost.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+		builder.addCase(dislikePost.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(dislikePost.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
 	},
 });
 
-export { getAllPosts, getSinglePost, addPost, editPost, deletePost };
+export {
+	getAllPosts,
+	getSinglePost,
+	addPost,
+	editPost,
+	deletePost,
+	likePost,
+	dislikePost,
+};
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost } = postsSlice.actions;
