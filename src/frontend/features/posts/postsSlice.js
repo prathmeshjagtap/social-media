@@ -195,7 +195,7 @@ const postsSlice = createSlice({
 			state.error = error.message;
 		});
 
-		builder.addCase(getBookmarks.pending, (state, { payload }) => {
+		builder.addCase(getBookmarks.pending, (state) => {
 			state.bookmarksStatus = "loading";
 		});
 

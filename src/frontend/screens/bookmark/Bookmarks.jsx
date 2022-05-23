@@ -13,16 +13,19 @@ function Bookmarks() {
 
 		return () => dispatch(unsuscribeBookmark());
 	}, [token, dispatch]);
+
 	return (
 		<Box>
 			{bookmarksStatus === "loading" && <Loader />}
-			{bookmarksStatus === "success" && bookmarks?.length > 0 ? (
-				bookmarks?.map((post) => <Posts key={post.id} post={post} />)
-			) : (
-				<Text mt="5" textAlign="center" p="4">
-					No Bookmarked Posts
-				</Text>
-			)}
+			{bookmarksStatus === "success" ? (
+				bookmarks?.length > 0 ? (
+					bookmarks?.map((post) => <Posts key={post.id} post={post} />)
+				) : (
+					<Text mt="5" textAlign="center" p="4">
+						No Bookmarked Posts
+					</Text>
+				)
+			) : null}
 			{bookmarksStatus === "failed" && (
 				<Text mt="5" textAlign="center" color="red.500" p="4">
 					Error Failed to load The data
