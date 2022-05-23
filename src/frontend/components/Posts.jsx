@@ -7,6 +7,7 @@ import {
 	BiDotsVerticalRounded,
 	BiEdit,
 } from "react-icons/bi";
+import { FaHeart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import {
 	Icon,
@@ -29,7 +30,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost } from "../features";
+import { deletePost, likePost, dislikePost } from "../features";
 import { EditPost } from "./EditPost";
 function Posts({ post }) {
 	const navigate = useNavigate();
@@ -89,16 +90,35 @@ function Posts({ post }) {
 					</Link>
 					<Flex justifyContent="space-between" px="4">
 						<Flex alignItems="center">
-							<Icon
-								as={BiHeart}
-								w="6"
-								h="6"
-								alignItems="center"
-								cursor="pointer"
-								onClick={(e) => {
-									e.stopPropagation();
-								}}
-							/>
+							{post?.likes?.likedBy.find(
+								(item) => item.username === user.username
+							) ? (
+								<Icon
+									as={FaHeart}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									onClick={(e) => {
+										e.stopPropagation();
+										dispatch(dislikePost({ token, postId: post._id }));
+									}}
+									color="red"
+								/>
+							) : (
+								<Icon
+									as={BiHeart}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									onClick={(e) => {
+										e.stopPropagation();
+										dispatch(likePost({ token, postId: post._id }));
+									}}
+								/>
+							)}
+
 							<Text mx="1">{post.likes.likeCount}</Text>
 						</Flex>
 						<Icon

@@ -1,10 +1,15 @@
-import { Flex, Box, Button } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Flex, Box, Button } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Home() {
 	const navigate = useNavigate();
-	return (
+	const { token } = useSelector((state) => state.auth);
+
+	return token ? (
+		<Navigate to="/userFeed" replace />
+	) : (
 		<div>
 			<Box>
 				<Flex justifyContent="center" alignItems="center" h="100vh">
