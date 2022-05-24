@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Social Media App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Quick Start
 
-In the project directory, you can run:
+Preview Link : https://connectier.netlify.app/
 
-### `yarn start`
+## Run Locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clone the project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+  git clone https://github.com/prathmeshjagtap/social-media.git
+```
 
-### `yarn test`
+Go to the project directory
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+  cd social-media
+```
 
-### `yarn build`
+Install dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Start the server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+  npm run start
+```
 
-### `yarn eject`
+## Features Available.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Add Post
+  - Add Post
+  - Edit Post
+  - Delete Post
+  - Like Post
+  - BookMark Post
+  - Add Comment on Post
+- Profile Feature
+  - Edit Profile
+  - Add Profile Picture
+  - Add Bio
+  - Add Website
+- Follow Unfollow
+  - Follow User
+  - Unfollow User
+  - visit user page
+- Filters
+  - Filter By Date
+  - Filter By Trending Post
+- Authentication
+  - Login
+  - Sigup
+  - Guest Login
+- Fully Resposive
+- Dark Theme Available
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Tech Stack
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Client:** React, Redux , Redux Toolkit , React Router v6 , Chakra UI
 
-## Learn More
+**Server:** Mockbee.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 👨‍💻 Connect with me
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<a href="https://twitter.com/prathmesh_20"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/prathmeshjagtap/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Demo
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![social gif](./src/frontend/assets/social1.gif)
