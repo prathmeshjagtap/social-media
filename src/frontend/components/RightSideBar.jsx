@@ -1,11 +1,21 @@
 import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
-import { Input, Text, Button, Box, Flex, Avatar, Icon } from "@chakra-ui/react";
+import {
+	Input,
+	Text,
+	Button,
+	Box,
+	Flex,
+	Avatar,
+	Icon,
+	Select,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, followUser } from "../features";
-import { Link } from "react-router-dom";
+import { getAllUsers, followUser, sortPosts } from "../features";
+import { Link, useLocation } from "react-router-dom";
 
 function RightSideBar() {
+	const location = useLocation();
 	const dispatch = useDispatch();
 	const allusers = useSelector((state) => state.user.allusers);
 	const currentUser = useSelector((state) => state.auth.user);
@@ -13,15 +23,14 @@ function RightSideBar() {
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, [dispatch]);
-
 	const toFollowUsers = allusers
 		.filter(
 			(item) =>
 				!item.followers.find(
-					(followerUser) => followerUser.username === currentUser.username
+					(followerUser) => followerUser?.username === currentUser?.username
 				)
 		)
-		.filter((item) => item.username !== currentUser.username);
+		.filter((item) => item?.username !== currentUser?.username);
 
 	return (
 		<Box
@@ -48,7 +57,32 @@ function RightSideBar() {
 					focusBorderColor="transparent"
 				/>
 			</Flex>
-			{toFollowUsers.length > 0 ? (
+			{location?.pathname === "/userFeed" && (
+				<Box>
+					<Text m="2">Sort by</Text>
+					<Button
+						bg={"red.400"}
+						color={"white"}
+						_hover={{
+							bg: "red.500",
+						}}
+						w="100%"
+						my="2"
+						onClick={() => dispatch(sortPosts("trending"))}
+					>
+						Trending Post
+					</Button>
+					<Select
+						onChange={(e) => dispatch(sortPosts(e.target.value))}
+						placeholder="Sort by Date"
+					>
+						<option value="newest">Newest First</option>
+						<option value="oldest">Oldest First</option>
+					</Select>
+				</Box>
+			)}
+
+			{toFollowUsers?.length > 0 ? (
 				<Text mt="4" mb="2" fontWeight="bold">
 					New Users to Follow
 				</Text>
