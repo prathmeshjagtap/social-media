@@ -10,7 +10,7 @@ function SinglePost() {
 	const { posts } = useSelector((state) => state.posts);
 	const { token } = useSelector((state) => state.auth);
 	const updatedSinglepost = posts.filter((item) => item?._id === postId);
-	const [addCommnet, setAddComment] = useState();
+	const [addCommnet, setAddComment] = useState("");
 	const dispatch = useDispatch();
 	return (
 		<Box>
