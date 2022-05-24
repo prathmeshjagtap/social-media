@@ -100,7 +100,7 @@ function Posts({ post }) {
 					<Flex justifyContent="space-between" px="4">
 						<Flex alignItems="center">
 							{post?.likes?.likedBy.find(
-								(item) => item.username === user.username
+								(item) => item?.username === user?.username
 							) ? (
 								<Icon
 									as={FaHeart}
