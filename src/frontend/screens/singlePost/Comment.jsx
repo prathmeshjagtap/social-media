@@ -12,10 +12,20 @@ import {
 	Button,
 	Input,
 } from "@chakra-ui/react";
-import { BiDotsVerticalRounded, BiEdit } from "react-icons/bi";
+import {
+	BiDotsVerticalRounded,
+	BiEdit,
+	BiUpvote,
+	BiDownvote,
+} from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteComment, editComment } from "../../features";
+import {
+	addDownvote,
+	addUpvote,
+	deleteComment,
+	editComment,
+} from "../../features";
 
 function Comment({ comment, postId }) {
 	const dispatch = useDispatch();
@@ -119,6 +129,79 @@ function Comment({ comment, postId }) {
 							</Flex>
 						</>
 					)}
+					<Flex gap="4" px="4">
+						{comment?.votes?.upvotedBy.find(
+							(item) => item.username === user.username
+						) ? (
+							<Flex alignItems="center">
+								<Icon
+									as={BiUpvote}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									color="red.500"
+								/>
+								<Text mx="1">{comment?.votes?.upvotedBy.length}</Text>
+							</Flex>
+						) : (
+							<Flex alignItems="center">
+								<Icon
+									as={BiUpvote}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									onClick={() =>
+										dispatch(
+											addUpvote({
+												token,
+												postId,
+												commentId: comment?._id,
+											})
+										)
+									}
+								/>
+								<Text mx="1">{comment?.votes?.upvotedBy.length}</Text>
+							</Flex>
+						)}
+
+						{comment?.votes?.downvotedBy.find(
+							(item) => item.username === user.username
+						) ? (
+							<Flex>
+								<Icon
+									as={BiDownvote}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									color="red.500"
+								/>
+								<Text mx="1">{comment?.votes?.downvotedBy.length}</Text>
+							</Flex>
+						) : (
+							<Flex>
+								<Icon
+									as={BiDownvote}
+									w="6"
+									h="6"
+									alignItems="center"
+									cursor="pointer"
+									onClick={() =>
+										dispatch(
+											addDownvote({
+												token,
+												postId,
+												commentId: comment?._id,
+											})
+										)
+									}
+								/>
+								<Text mx="1">{comment?.votes?.downvotedBy.length}</Text>
+							</Flex>
+						)}
+					</Flex>
 				</Box>
 			</Flex>
 		</Box>
