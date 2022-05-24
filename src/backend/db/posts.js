@@ -43,10 +43,12 @@ export const posts = [
 		comments: [
 			{
 				_id: uuid(),
+				firstName: "Leo",
+				lastName: "Messi",
 				username: "messi",
-				text: "Bro this is cool",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
+				text: "Bro this is cool",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
@@ -90,6 +92,8 @@ export const posts = [
 			{
 				_id: uuid(),
 				username: "prathmesh",
+				firstName: "Prathmesh",
+				lastName: "Jagtap",
 				text: "lol",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
@@ -137,6 +141,8 @@ export const posts = [
 			{
 				_id: uuid(),
 				username: "elonmusk",
+				firstName: "Elon",
+				lastName: "Musk",
 				text: "Bro I am gonna get you into Twitter",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
@@ -183,6 +189,8 @@ export const posts = [
 			{
 				_id: uuid(),
 				username: "prathmesh",
+				firstName: "Prathmesh",
+				lastName: "Jagtap",
 				text: "You are legend",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
@@ -229,6 +237,8 @@ export const posts = [
 			{
 				_id: uuid(),
 				username: "elonmusk",
+				firstName: "Elon",
+				lastName: "Musk",
 				text: "Yes its comming soon",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
@@ -274,6 +284,8 @@ export const posts = [
 			{
 				_id: uuid(),
 				username: "elonmusk",
+				firstName: "Elon",
+				lastName: "Musk",
 				text: "2 goats ",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
