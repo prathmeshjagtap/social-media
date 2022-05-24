@@ -249,15 +249,18 @@ export const posts = [
 			},
 		],
 	},
+
 	{
+		_id: uuid(),
 		firstName: "Leo",
 		lastName: "Messi",
 		username: "messi",
+		password: "messibhai",
 		avatarURL:
 			"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
-		content: "Gonna join Manchester United",
+		content: "Joining Barcelona next seasson",
 		likes: {
 			likeCount: 2,
 			likedBy: [
@@ -271,11 +274,11 @@ export const posts = [
 				},
 				{
 					_id: uuid(),
-					firstName: "Prathmesh",
-					lastName: "Jagtap",
-					username: "prathmesh",
+					firstName: "Leo",
+					lastName: "Messi",
+					username: "messi",
 					avatarURL:
-						"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
+						"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 				},
 			],
 			dislikedBy: [],
@@ -286,7 +289,7 @@ export const posts = [
 				username: "elonmusk",
 				firstName: "Elon",
 				lastName: "Musk",
-				text: "2 goats ",
+				text: "Goat",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 				votes: {
