@@ -14,11 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { BiDotsVerticalRounded, BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteComment, editComment } from "../../features";
 
-function Comment({ comment }) {
-	const { user } = useSelector((state) => state.auth);
-
+function Comment({ comment, postId }) {
+	const dispatch = useDispatch();
+	const { user, token } = useSelector((state) => state.auth);
 	const [isEditing, setIsEditing] = useState(false);
 	const [edittedComment, setEdittedComment] = useState(comment?.text);
 	return (
@@ -51,7 +52,19 @@ function Comment({ comment }) {
 									>
 										Edit
 									</MenuItem>
-									<MenuItem fontSize={"20"} icon={<MdDelete />}>
+									<MenuItem
+										fontSize={"20"}
+										icon={<MdDelete />}
+										onClick={() =>
+											dispatch(
+												deleteComment({
+													token,
+													postId,
+													commentId: comment?._id,
+												})
+											)
+										}
+									>
 										Delete
 									</MenuItem>
 								</MenuList>
@@ -84,6 +97,17 @@ function Comment({ comment }) {
 									color={"white"}
 									_hover={{
 										bg: "blue.500",
+									}}
+									onClick={() => {
+										dispatch(
+											editComment({
+												token,
+												postId,
+												commentId: comment?._id,
+												commentData: { text: edittedComment },
+											})
+										);
+										setIsEditing(false);
 									}}
 								>
 									Save

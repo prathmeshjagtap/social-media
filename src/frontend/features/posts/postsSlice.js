@@ -158,6 +158,7 @@ const deleteComment = createAsyncThunk(
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/delete/${postId}/${commentId}`,
+			{},
 			{
 				headers: { authorization: token },
 			}
