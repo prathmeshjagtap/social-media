@@ -50,16 +50,15 @@ function Posts({ post }) {
 	return (
 		<Box boxShadow="xl" my="4">
 			<Flex gap="2" p="4">
-				<Avatar size="sm" name="Kola Tioluwani" src={post.avatarURL} />
+				<Avatar size="sm" name="Kola Tioluwani" src={post?.avatarURL} />
 				<Box w="100%">
 					<Flex w="100%" alignItems="center" justifyContent="space-between">
 						<Link to={`/profile/${post?.username}`}>
 							<Flex alignItems="center">
-								<Text
-									px="2"
-									fontWeight="bold"
-								>{`${post.firstName} ${post.lastName}`}</Text>
-								<Text fontSize="sm">@{post.username}</Text>
+								<Text px="2" fontWeight="bold">
+									{post?.firstName} {post?.lastName}
+								</Text>
+								<Text fontSize="sm">@{post?.username}</Text>
 							</Flex>
 						</Link>
 						{user?.username === post?.username ? (
@@ -95,8 +94,8 @@ function Posts({ post }) {
 						) : null}
 					</Flex>
 
-					<Link to={`/post/${post._id}`}>
-						<Text p="2">{post.content}</Text>
+					<Link to={`/post/${post?._id}`}>
+						<Text p="2">{post?.content}</Text>
 					</Link>
 					<Flex justifyContent="space-between" px="4">
 						<Flex alignItems="center">
@@ -129,16 +128,19 @@ function Posts({ post }) {
 								/>
 							)}
 
-							<Text mx="1">{post.likes.likeCount}</Text>
+							<Text mx="1">{post?.likes?.likeCount}</Text>
 						</Flex>
-						<Icon
-							as={BiComment}
-							w="6"
-							h="6"
-							alignItems="center"
-							cursor="pointer"
-							onClick={() => navigate(`/post/${post._id}`)}
-						/>
+						<Flex>
+							<Icon
+								as={BiComment}
+								w="6"
+								h="6"
+								alignItems="center"
+								cursor="pointer"
+								onClick={() => navigate(`/post/${post._id}`)}
+							/>
+							<Text mx="1">{post?.comments.length}</Text>
+						</Flex>
 						<Icon
 							as={BiShareAlt}
 							w="6"

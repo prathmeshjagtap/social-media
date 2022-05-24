@@ -121,6 +121,52 @@ const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
 	return data;
 });
 
+const addComment = createAsyncThunk(
+	"/posts/addComment ",
+	async ({ token, postId, commentData }) => {
+		const { data } = await axios.post(
+			`/api/comments/add/${postId}`,
+			{
+				commentData,
+			},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const editComment = createAsyncThunk(
+	"/posts/editComment ",
+	async ({ token, postId, commentId, commentData }) => {
+		const { data } = await axios.post(
+			`/api/comments/edit/${postId}/${commentId}`,
+			{
+				commentData,
+			},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const deleteComment = createAsyncThunk(
+	"/posts/deleteComment ",
+	async ({ token, postId, commentId }) => {
+		const { data } = await axios.post(
+			`/api/comments/delete/${postId}/${commentId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
 const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -221,6 +267,26 @@ const postsSlice = createSlice({
 		builder.addCase(deleteBookmark.rejected, (state, { error }) => {
 			state.error = error.message;
 		});
+
+		builder.addCase(addComment.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(addComment.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+
+		builder.addCase(editComment.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(editComment.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+		builder.addCase(deleteComment.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(deleteComment.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
 	},
 });
 
@@ -235,6 +301,9 @@ export {
 	addBookmark,
 	deleteBookmark,
 	getBookmarks,
+	addComment,
+	editComment,
+	deleteComment,
 };
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost, unsuscribeBookmark } = postsSlice.actions;
