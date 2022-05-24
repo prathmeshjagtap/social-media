@@ -27,7 +27,6 @@ import {
 	FiMenu,
 	FiChevronDown,
 } from "react-icons/fi";
-import { BiBell } from "react-icons/bi";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,7 +61,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
 	const LinkItems = [
 		{ name: "user Feed", icon: FiHome, Link: "/userFeed" },
 		{ name: "Explore", icon: FiCompass, Link: "/explore" },
-		{ name: "Notifcation", icon: BiBell, Link: "/notification" },
 		{ name: "Bookmarks", icon: FiStar, Link: "/bookmarks" },
 		{ name: "Profile", icon: FiUser, Link: `/profile/${user?.username}` },
 	];
@@ -195,7 +193,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
 								bg={useColorModeValue("white", "gray.900")}
 								borderColor={useColorModeValue("gray.200", "gray.700")}
 							>
-								<MenuItem onClick={() => navigate("/profile")}>
+								<MenuItem
+									onClick={() => navigate(`/profile/${user?.username}`)}
+								>
 									Profile
 								</MenuItem>
 

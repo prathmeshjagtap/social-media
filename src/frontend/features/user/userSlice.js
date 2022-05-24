@@ -42,6 +42,30 @@ const updateUser = createAsyncThunk(
 	}
 );
 
+const followUser = createAsyncThunk(
+	"/user/userfollowers",
+	async ({ token, followUserId }) => {
+		const { data } = await axios.post(
+			`/api/users/follow/${followUserId}`,
+			{},
+			{ headers: { authorization: token } }
+		);
+		return data;
+	}
+);
+
+const unfollowUser = createAsyncThunk(
+	"/user/unfollow",
+	async ({ token, followUserId }) => {
+		const { data } = await axios.post(
+			`/api/users/unfollow/${followUserId}`,
+			{},
+			{ headers: { authorization: token } }
+		);
+		return data;
+	}
+);
+
 const userSlice = createSlice({
 	name: "user",
 	initialState,
@@ -86,9 +110,30 @@ const userSlice = createSlice({
 		builder.addCase(updateUser.rejected, (state, { error }) => {
 			state.error = error.message;
 		});
+
+		builder.addCase(followUser.fulfilled, (state, { payload }) => {
+			state.allusers = payload.users;
+		});
+		builder.addCase(followUser.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+
+		builder.addCase(unfollowUser.fulfilled, (state, { payload }) => {
+			state.allusers = payload.users;
+		});
+		builder.addCase(unfollowUser.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
 	},
 });
 
 export const userReducer = userSlice.reducer;
-export { getAllUsers, getSingleUser, updateUser, getUserPosts };
+export {
+	getAllUsers,
+	getSingleUser,
+	updateUser,
+	getUserPosts,
+	followUser,
+	unfollowUser,
+};
 export const { clearUser } = userSlice.actions;

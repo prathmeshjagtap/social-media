@@ -53,13 +53,15 @@ function Posts({ post }) {
 				<Avatar size="sm" name="Kola Tioluwani" src={post.avatarURL} />
 				<Box w="100%">
 					<Flex w="100%" alignItems="center" justifyContent="space-between">
-						<Flex alignItems="center">
-							<Text
-								px="2"
-								fontWeight="bold"
-							>{`${post.firstName} ${post.lastName}`}</Text>
-							<Text fontSize="sm">@{post.username}</Text>
-						</Flex>
+						<Link to={`/profile/${post?.username}`}>
+							<Flex alignItems="center">
+								<Text
+									px="2"
+									fontWeight="bold"
+								>{`${post.firstName} ${post.lastName}`}</Text>
+								<Text fontSize="sm">@{post.username}</Text>
+							</Flex>
+						</Link>
 						{user?.username === post?.username ? (
 							<Menu onClick={(e) => e.stopPropagation()}>
 								<MenuButton as={Button} fontSize="lg">

@@ -2,15 +2,26 @@ import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Input, Text, Button, Box, Flex, Avatar, Icon } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../features";
+import { getAllUsers, followUser } from "../features";
 import { Link } from "react-router-dom";
 
 function RightSideBar() {
 	const dispatch = useDispatch();
 	const allusers = useSelector((state) => state.user.allusers);
+	const currentUser = useSelector((state) => state.auth.user);
+	const token = useSelector((state) => state.auth.token);
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, [dispatch]);
+
+	const toFollowUsers = allusers
+		.filter(
+			(item) =>
+				!item.followers.find(
+					(followerUser) => followerUser.username === currentUser.username
+				)
+		)
+		.filter((item) => item.username !== currentUser.username);
 
 	return (
 		<Box
@@ -37,11 +48,21 @@ function RightSideBar() {
 					focusBorderColor="transparent"
 				/>
 			</Flex>
-			{allusers?.map((user) => {
+			{toFollowUsers.length > 0 ? (
+				<Text mt="4" mb="2" fontWeight="bold">
+					New Users to Follow
+				</Text>
+			) : (
+				<Text textAlign="center" mt="4" mb="2">
+					No new users to Follow
+				</Text>
+			)}
+
+			{toFollowUsers?.map((user) => {
 				return (
-					<Link to={`/profile/${user?.username}`} key={user?._id}>
-						<Box p="2" mt="4" key={user?._id}>
-							<Flex gap="2" justifyContent="space-between">
+					<Box p="2" key={user?._id}>
+						<Flex gap="2" justifyContent="space-between">
+							<Link to={`/profile/${user?.username}`} key={user?._id}>
 								<Flex alignItems="center" gap="1">
 									<Avatar
 										size="sm"
@@ -55,18 +76,20 @@ function RightSideBar() {
 										<Text>@{user?.username}</Text>
 									</Box>
 								</Flex>
-
-								<Button
-									ml="4"
-									size="xs"
-									justifySelf="end"
-									onClick={(e) => e.stopPropagation()}
-								>
-									Follow +
-								</Button>
-							</Flex>
-						</Box>
-					</Link>
+							</Link>
+							<Button
+								ml="4"
+								size="xs"
+								justifySelf="end"
+								onClick={(e) => {
+									e.stopPropagation();
+									dispatch(followUser({ token, followUserId: user?._id }));
+								}}
+							>
+								Follow +
+							</Button>
+						</Flex>
+					</Box>
 				);
 			})}
 		</Box>
