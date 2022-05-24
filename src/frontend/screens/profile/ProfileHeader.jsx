@@ -17,15 +17,19 @@ import {
 	ModalBody,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EditProfile } from "./EditProfile";
+import { followUser, unfollowUser } from "../../features";
 
 function ProfileHeader() {
-	const { user } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const { token } = useSelector((state) => state.auth);
 	const currentUser = useSelector((state) => state.auth.user);
+	const { userPosts, user } = useSelector((state) => state.user);
 	const { isOpen, onClose, onOpen } = useDisclosure();
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
+
 	return (
 		<>
 			<Box
@@ -85,7 +89,8 @@ function ProfileHeader() {
 							<Link href={user?.userWebsite} color={"blue.400"} target="_blank">
 								{user?.userWebsite}
 							</Link>
-							<Flex>
+							<Flex gap="2">
+								<Text>{userPosts?.length} Posts</Text>
 								<Text>{user?.followers?.length} Followers</Text>
 								<Text>{user?.following?.length} Following</Text>
 							</Flex>
@@ -112,6 +117,30 @@ function ProfileHeader() {
 							>
 								Edit
 							</Button>
+						) : user?.followers.find(
+								(item) => item.username === currentUser.username
+						  ) ? (
+							<Button
+								flex={1}
+								fontSize={"sm"}
+								rounded={"full"}
+								bg={"blue.400"}
+								color={"white"}
+								boxShadow={
+									"0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+								}
+								_hover={{
+									bg: "blue.500",
+								}}
+								_focus={{
+									bg: "blue.500",
+								}}
+								onClick={() =>
+									dispatch(unfollowUser({ token, followUserId: user?._id }))
+								}
+							>
+								UnFollow
+							</Button>
 						) : (
 							<Button
 								flex={1}
@@ -128,6 +157,9 @@ function ProfileHeader() {
 								_focus={{
 									bg: "blue.500",
 								}}
+								onClick={() =>
+									dispatch(followUser({ token, followUserId: user?._id }))
+								}
 							>
 								Follow
 							</Button>

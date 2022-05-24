@@ -16,7 +16,6 @@ import {
 	ModalBody,
 } from "@chakra-ui/react";
 import { FiHome, FiCompass, FiStar, FiUser } from "react-icons/fi";
-import { BiBell } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
 import { AddPost } from "./AddPost";
 import { useSelector } from "react-redux";
@@ -34,7 +33,6 @@ function SideBar() {
 		{ name: "UserFeed", icon: FiHome, Link: "/userFeed" },
 		{ name: "Explore", icon: FiCompass, Link: "/explore" },
 		{ name: "Bookmarks", icon: FiStar, Link: "/bookmarks" },
-		{ name: "Notifcation", icon: BiBell, Link: "/notification" },
 		{ name: "Profile", icon: FiUser, Link: `/profile/${user?.username}` },
 	];
 	return (
