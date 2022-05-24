@@ -59,7 +59,7 @@ function ProfileHeader() {
 							<Avatar
 								size="lg"
 								src={user?.avatarURL}
-								alt={"Avatar Alt"}
+								alt={`${user?.firstName}  ${user?.lastName}`}
 								pos={"relative"}
 								_after={{
 									content: '""',

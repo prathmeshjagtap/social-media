@@ -25,7 +25,11 @@ function Comment({ comment, postId }) {
 	return (
 		<Box boxShadow="xl" my="4">
 			<Flex gap="2" p="4">
-				<Avatar size="sm" name="Kola Tioluwani" src={comment?.avatarURL} />
+				<Avatar
+					size="sm"
+					name={`${user?.firstName}  ${user?.lastName}`}
+					src={comment?.avatarURL}
+				/>
 				<Box w="100%">
 					<Flex w="100%" alignItems="center" justifyContent="space-between">
 						<Flex alignItems="center">

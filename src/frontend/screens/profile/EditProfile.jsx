@@ -34,24 +34,37 @@ function EditProfile({ close, user }) {
 	};
 	return (
 		<Box>
-			<FormLabel
-				fontSize="sm"
-				fontWeight="md"
-				color={useColorModeValue("gray.700", "gray.50")}
-			>
-				User Info
-			</FormLabel>
 			<Flex gap="4" mb="2">
-				<Input
-					value={profile?.firstName}
-					onChange={handleChange}
-					name="firstName"
-				/>
-				<Input
-					value={profile?.lastName}
-					onChange={handleChange}
-					name="lastName"
-				/>
+				<Box>
+					<FormLabel
+						fontSize="sm"
+						fontWeight="md"
+						color={useColorModeValue("gray.700", "gray.50")}
+					>
+						First Name
+					</FormLabel>
+					<Input
+						value={profile?.firstName}
+						onChange={handleChange}
+						name="firstName"
+						isDisabled
+					/>
+				</Box>
+				<Box>
+					<FormLabel
+						fontSize="sm"
+						fontWeight="md"
+						color={useColorModeValue("gray.700", "gray.50")}
+					>
+						Last Name
+					</FormLabel>
+					<Input
+						value={profile?.lastName}
+						onChange={handleChange}
+						name="lastName"
+						isDisabled
+					/>
+				</Box>
 			</Flex>
 			<FormLabel
 				fontSize="sm"
