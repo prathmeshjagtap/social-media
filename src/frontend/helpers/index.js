@@ -1,0 +1,1 @@
+export { sortPosts } from "./sortPost";

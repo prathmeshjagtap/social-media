@@ -77,8 +77,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			{...rest}
 		>
 			<Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-				<Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-					Logo
+				<Text
+					fontSize="2xl"
+					fontFamily="monospace"
+					fontWeight="bold"
+					textColor="blue.400"
+				>
+					Connectier
 				</Text>
 				<CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
 			</Flex>
@@ -150,8 +155,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
 				fontWeight="bold"
 				display={{ base: "none", md: "block" }}
 				ml="4"
+				textColor="blue.400"
 			>
-				Logo
+				Connectier
 			</Text>
 			<Flex
 				justifyContent="space-between"

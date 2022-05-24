@@ -10,6 +10,7 @@ const initialState = {
 	userPost: null,
 	bookmarks: [],
 	bookmarksStatus: "idle",
+	sortBy: "newest",
 };
 
 const getAllPosts = createAsyncThunk("/posts/getAllPosts ", async () => {
@@ -175,6 +176,9 @@ const postsSlice = createSlice({
 			state.singlePost = null;
 			state.singlePostStatus = "idle";
 		},
+		sortPosts: (state, action) => {
+			state.sortBy = action.payload;
+		},
 		unsuscribeBookmark: (state) => {
 			state.bookmarksStatus = "idle";
 		},
@@ -306,4 +310,5 @@ export {
 	deleteComment,
 };
 export const postreducer = postsSlice.reducer;
-export const { unsuscribeSinglePost, unsuscribeBookmark } = postsSlice.actions;
+export const { unsuscribeSinglePost, unsuscribeBookmark, sortPosts } =
+	postsSlice.actions;
