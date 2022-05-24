@@ -100,7 +100,7 @@ function RightSideBar() {
 								<Flex alignItems="center" gap="1">
 									<Avatar
 										size="sm"
-										name="Kola Tioluwani"
+										name={`${user?.firstName}  ${user?.lastName}`}
 										src={user?.avatarURL}
 									/>
 									<Box>

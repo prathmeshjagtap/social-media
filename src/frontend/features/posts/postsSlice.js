@@ -168,6 +168,34 @@ const deleteComment = createAsyncThunk(
 	}
 );
 
+const addUpvote = createAsyncThunk(
+	"/posts/addUpvote ",
+	async ({ token, postId, commentId }) => {
+		const { data } = await axios.post(
+			`/api/comments/upvote/${postId}/${commentId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
+const addDownvote = createAsyncThunk(
+	"/posts/addDownvote ",
+	async ({ token, postId, commentId }) => {
+		const { data } = await axios.post(
+			`/api/comments/downvote/${postId}/${commentId}`,
+			{},
+			{
+				headers: { authorization: token },
+			}
+		);
+		return data;
+	}
+);
+
 const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -291,6 +319,20 @@ const postsSlice = createSlice({
 		builder.addCase(deleteComment.rejected, (state, { error }) => {
 			state.error = error.message;
 		});
+
+		builder.addCase(addUpvote.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(addUpvote.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
+
+		builder.addCase(addDownvote.fulfilled, (state, { payload }) => {
+			state.posts = payload.posts;
+		});
+		builder.addCase(addDownvote.rejected, (state, { error }) => {
+			state.error = error.message;
+		});
 	},
 });
 
@@ -308,6 +350,8 @@ export {
 	addComment,
 	editComment,
 	deleteComment,
+	addUpvote,
+	addDownvote,
 };
 export const postreducer = postsSlice.reducer;
 export const { unsuscribeSinglePost, unsuscribeBookmark, sortPosts } =

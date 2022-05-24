@@ -50,7 +50,11 @@ function Posts({ post }) {
 	return (
 		<Box boxShadow="xl" my="4">
 			<Flex gap="2" p="4">
-				<Avatar size="sm" name="Kola Tioluwani" src={post?.avatarURL} />
+				<Avatar
+					size="sm"
+					name={`${post?.firstName}  ${post?.lastName}`}
+					src={post?.avatarURL}
+				/>
 				<Box w="100%">
 					<Flex w="100%" alignItems="center" justifyContent="space-between">
 						<Link to={`/profile/${post?.username}`}>
