@@ -130,14 +130,17 @@ function Posts({ post }) {
 
 							<Text mx="1">{post?.likes?.likeCount}</Text>
 						</Flex>
-						<Icon
-							as={BiComment}
-							w="6"
-							h="6"
-							alignItems="center"
-							cursor="pointer"
-							onClick={() => navigate(`/post/${post._id}`)}
-						/>
+						<Flex>
+							<Icon
+								as={BiComment}
+								w="6"
+								h="6"
+								alignItems="center"
+								cursor="pointer"
+								onClick={() => navigate(`/post/${post._id}`)}
+							/>
+							<Text mx="1">{post?.comments.length}</Text>
+						</Flex>
 						<Icon
 							as={BiShareAlt}
 							w="6"
