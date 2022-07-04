@@ -39,7 +39,7 @@ function EditPost({ close, post }) {
 			<Box w="100%">
 				<Textarea
 					resize="none"
-					placeholder="What is Happending"
+					placeholder="what's happening"
 					size="md"
 					w="100%"
 					my="2"

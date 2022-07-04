@@ -13,12 +13,12 @@ const initialState = {
 	sortBy: "newest",
 };
 
-const getAllPosts = createAsyncThunk("/posts/getAllPosts ", async () => {
+const getAllPosts = createAsyncThunk("posts/getAllPosts", async () => {
 	const { data } = await axios.get("/api/posts");
 	return data;
 });
 const getSinglePost = createAsyncThunk(
-	"/posts/getSinglePost ",
+	"posts/getSinglePost",
 	async (postId) => {
 		const { data } = await axios.get(`/api/posts/${postId}`);
 		return data;
@@ -26,7 +26,7 @@ const getSinglePost = createAsyncThunk(
 );
 
 const addPost = createAsyncThunk(
-	"/posts/addPost ",
+	"posts/addPost",
 	async ({ token, postData }) => {
 		const { data } = await axios.post(
 			"/api/posts",
@@ -38,7 +38,7 @@ const addPost = createAsyncThunk(
 );
 
 const editPost = createAsyncThunk(
-	"/posts/editPost ",
+	"posts/editPost",
 	async ({ token, postId, postData }) => {
 		const { data } = await axios.post(
 			`/api/posts/edit/${postId}`,
@@ -50,7 +50,7 @@ const editPost = createAsyncThunk(
 );
 
 const deletePost = createAsyncThunk(
-	"/posts/deletePost ",
+	"posts/deletePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.delete(`/api/posts/${postId}`, {
 			headers: { authorization: token },
@@ -60,7 +60,7 @@ const deletePost = createAsyncThunk(
 );
 
 const likePost = createAsyncThunk(
-	"/posts/likePost ",
+	"posts/likePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/posts/like/${postId}`,
@@ -74,7 +74,7 @@ const likePost = createAsyncThunk(
 );
 
 const dislikePost = createAsyncThunk(
-	"/posts/dislikePost ",
+	"posts/dislikePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/posts/dislike/${postId}`,
@@ -88,7 +88,7 @@ const dislikePost = createAsyncThunk(
 );
 
 const addBookmark = createAsyncThunk(
-	"/posts/addBookmark ",
+	"posts/addBookmark",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/users/bookmark/${postId}`,
@@ -102,7 +102,7 @@ const addBookmark = createAsyncThunk(
 );
 
 const deleteBookmark = createAsyncThunk(
-	"/posts/deleteBookmark ",
+	"posts/deleteBookmark",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/users/remove-bookmark/${postId}`,
@@ -115,7 +115,7 @@ const deleteBookmark = createAsyncThunk(
 	}
 );
 
-const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
+const getBookmarks = createAsyncThunk("posts/getBookmarks ", async (token) => {
 	const { data } = await axios.get("/api/users/bookmark", {
 		headers: { authorization: token },
 	});
@@ -123,7 +123,7 @@ const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
 });
 
 const addComment = createAsyncThunk(
-	"/posts/addComment ",
+	"posts/addComment",
 	async ({ token, postId, commentData }) => {
 		const { data } = await axios.post(
 			`/api/comments/add/${postId}`,
@@ -139,7 +139,7 @@ const addComment = createAsyncThunk(
 );
 
 const editComment = createAsyncThunk(
-	"/posts/editComment ",
+	"posts/editComment",
 	async ({ token, postId, commentId, commentData }) => {
 		const { data } = await axios.post(
 			`/api/comments/edit/${postId}/${commentId}`,
@@ -155,7 +155,7 @@ const editComment = createAsyncThunk(
 );
 
 const deleteComment = createAsyncThunk(
-	"/posts/deleteComment ",
+	"posts/deleteComment",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/delete/${postId}/${commentId}`,
@@ -169,7 +169,7 @@ const deleteComment = createAsyncThunk(
 );
 
 const addUpvote = createAsyncThunk(
-	"/posts/addUpvote ",
+	"posts/addUpvote",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/upvote/${postId}/${commentId}`,
@@ -183,7 +183,7 @@ const addUpvote = createAsyncThunk(
 );
 
 const addDownvote = createAsyncThunk(
-	"/posts/addDownvote ",
+	"posts/addDownvote",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/downvote/${postId}/${commentId}`,

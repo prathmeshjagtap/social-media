@@ -15,23 +15,20 @@ const getAllUsers = createAsyncThunk("/user/getAllUsers", async () => {
 });
 
 const getSingleUser = createAsyncThunk(
-	"/user/getSingleUser",
+	"user/getSingleUser",
 	async (username) => {
 		const { data } = await axios.get(`/api/users/${username}`);
 		return data;
 	}
 );
 
-const getUserPosts = createAsyncThunk(
-	"/user/getUserPosts",
-	async (username) => {
-		const { data } = await axios.get(`/api/posts/user/${username}`);
-		return data;
-	}
-);
+const getUserPosts = createAsyncThunk("user/getUserPosts", async (username) => {
+	const { data } = await axios.get(`/api/posts/user/${username}`);
+	return data;
+});
 
 const updateUser = createAsyncThunk(
-	"/posts/updateUser ",
+	"user/updateUser",
 	async ({ token, userData }) => {
 		const { data } = await axios.post(
 			"/api/users/edit",
@@ -43,7 +40,7 @@ const updateUser = createAsyncThunk(
 );
 
 const followUser = createAsyncThunk(
-	"/user/userfollowers",
+	"user/userfollowers",
 	async ({ token, followUserId }) => {
 		const { data } = await axios.post(
 			`/api/users/follow/${followUserId}`,
@@ -55,7 +52,7 @@ const followUser = createAsyncThunk(
 );
 
 const unfollowUser = createAsyncThunk(
-	"/user/unfollow",
+	"user/unfollow",
 	async ({ token, followUserId }) => {
 		const { data } = await axios.post(
 			`/api/users/unfollow/${followUserId}`,
