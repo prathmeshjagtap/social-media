@@ -53,6 +53,11 @@ function Signup() {
 			align={"center"}
 			justify={"center"}
 			bg={useColorModeValue("gray.50", "gray.800")}
+			as={"form"}
+			onSubmit={(e) => {
+				e.preventDefault();
+				signupHandler(userDetail);
+			}}
 		>
 			<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
 				<Stack align={"center"}>
@@ -134,7 +139,7 @@ function Signup() {
 								_hover={{
 									bg: "blue.500",
 								}}
-								onClick={() => signupHandler(userDetail)}
+								type="submit"
 							>
 								Sign up
 							</Button>

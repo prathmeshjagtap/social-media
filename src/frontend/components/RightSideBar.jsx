@@ -44,7 +44,7 @@ function RightSideBar() {
 			p="2"
 			borderRadius="md"
 		>
-			<Flex alignItems="center" border="2px">
+			<Flex alignItems="center" border="1px" borderRadius="md">
 				<Icon
 					as={BiSearch}
 					w="6"
