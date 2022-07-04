@@ -42,6 +42,7 @@ function RightSideBar() {
 			bg={useColorModeValue("gray.100", "whiteAlpha.200")}
 			display={{ base: "none", md: "none", lg: "none", xl: "block" }}
 			p="2"
+			borderRadius="md"
 		>
 			<Flex alignItems="center" border="2px">
 				<Icon

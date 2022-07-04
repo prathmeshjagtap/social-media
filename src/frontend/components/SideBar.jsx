@@ -14,15 +14,14 @@ import {
 	ModalCloseButton,
 	ModalHeader,
 	ModalBody,
+	Link,
 } from "@chakra-ui/react";
 import { FiHome, FiCompass, FiStar, FiUser } from "react-icons/fi";
-import { useNavigate, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AddPost } from "./AddPost";
 import { useSelector } from "react-redux";
 
 function SideBar() {
-	const navigate = useNavigate();
-
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const initialRef = React.useRef();
@@ -48,11 +47,7 @@ function SideBar() {
 			>
 				<Box p="2">
 					{LinkItems.map((link) => (
-						<NavItem
-							key={link.name}
-							icon={link.icon}
-							onClick={() => navigate(link.Link)}
-						>
+						<NavItem key={link.name} icon={link.icon} path={link.Link}>
 							{link.name}
 						</NavItem>
 					))}
@@ -60,9 +55,10 @@ function SideBar() {
 						<Button
 							w="100%"
 							rounded="md"
-							bg="blue.300"
+							bg="blue.400"
+							color="white"
 							_hover={{
-								bg: "cyan.400",
+								bg: "blue.200",
 								color: "white",
 							}}
 							onClick={onOpen}
@@ -105,33 +101,72 @@ function SideBar() {
 	);
 }
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, children, path, ...rest }) => {
 	return (
-		<Flex
-			align="center"
-			p="4"
-			mx="4"
-			borderRadius="lg"
-			role="group"
-			cursor="pointer"
-			_hover={{
-				bg: "cyan.400",
-				color: "white",
-			}}
-			{...rest}
+		<Link
+			as={NavLink}
+			to={path}
+			style={{ textDecoration: "none" }}
+			_focus={{ boxShadow: "none" }}
 		>
-			{icon && (
-				<Icon
-					mr="4"
-					fontSize="16"
-					_groupHover={{
-						color: "white",
-					}}
-					as={icon}
-				/>
-			)}
-			{children}
-		</Flex>
+			{({ isActive }) =>
+				isActive ? (
+					<Flex
+						align="center"
+						p="4"
+						mx="4"
+						borderRadius="lg"
+						role="group"
+						cursor="pointer"
+						bg="blue.400"
+						color="white"
+						_hover={{
+							bg: "blue.200",
+							color: "white",
+						}}
+						{...rest}
+					>
+						{icon && (
+							<Icon
+								mr="4"
+								fontSize="16"
+								_groupHover={{
+									color: "white",
+								}}
+								as={icon}
+							/>
+						)}
+						{children}
+					</Flex>
+				) : (
+					<Flex
+						align="center"
+						p="4"
+						mx="4"
+						borderRadius="lg"
+						role="group"
+						cursor="pointer"
+						_hover={{
+							bg: "blue.200",
+							color: "white",
+						}}
+						{...rest}
+					>
+						{icon && (
+							<Icon
+								mr="4"
+								fontSize="16"
+								_groupHover={{
+									color: "white",
+								}}
+								as={icon}
+							/>
+						)}
+						{children}
+					</Flex>
+				)
+			}
+		</Link>
 	);
 };
 
