@@ -72,55 +72,55 @@ const userSlice = createSlice({
 			state.user = null;
 		},
 	},
-	extraReducers: (builder) => {
-		builder.addCase(getAllUsers.fulfilled, (state, { payload }) => {
+	extraReducers: {
+		[getAllUsers.fulfilled]: (state, { payload }) => {
 			state.allusers = payload.users;
-		});
-		builder.addCase(getAllUsers.rejected, (state, { error }) => {
+		},
+		[getAllUsers.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
-		builder.addCase(getSingleUser.pending, (state) => {
+		},
+		[getSingleUser.pending]: (state) => {
 			state.userStatus = "loading";
-		});
-		builder.addCase(getSingleUser.fulfilled, (state, { payload }) => {
+		},
+		[getSingleUser.fulfilled]: (state, { payload }) => {
 			state.user = payload.user;
 			state.userStatus = "success";
-		});
-		builder.addCase(getSingleUser.rejected, (state, { error }) => {
+		},
+		[getSingleUser.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.userStatus = "failed";
-		});
-		builder.addCase(getUserPosts.pending, (state) => {
+		},
+		[getUserPosts.pending]: (state) => {
 			state.userStatus = "loading";
-		});
-		builder.addCase(getUserPosts.fulfilled, (state, { payload }) => {
+		},
+		[getUserPosts.fulfilled]: (state, { payload }) => {
 			state.userPosts = payload.posts;
 			state.userStatus = "success";
-		});
-		builder.addCase(getUserPosts.rejected, (state, { error }) => {
+		},
+		[getUserPosts.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.userStatus = "failed";
-		});
-		builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+		},
+		[updateUser.fulfilled]: (state, { payload }) => {
 			state.user = payload.user;
-		});
-		builder.addCase(updateUser.rejected, (state, { error }) => {
+		},
+		[updateUser.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(followUser.fulfilled, (state, { payload }) => {
+		[followUser.fulfilled]: (state, { payload }) => {
 			state.allusers = payload.users;
-		});
-		builder.addCase(followUser.rejected, (state, { error }) => {
+		},
+		[followUser.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(unfollowUser.fulfilled, (state, { payload }) => {
+		[unfollowUser.fulfilled]: (state, { payload }) => {
 			state.allusers = payload.users;
-		});
-		builder.addCase(unfollowUser.rejected, (state, { error }) => {
+		},
+		[unfollowUser.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 	},
 });
 

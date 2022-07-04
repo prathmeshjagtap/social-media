@@ -39,7 +39,7 @@ function SideBar() {
 		<>
 			<Box
 				minH="85vh"
-				bg={useColorModeValue("gray.100", "gray.900")}
+				bg={useColorModeValue("gray.100", "whiteAlpha.200")}
 				position="sticky"
 				top="100px"
 				minW="250px"

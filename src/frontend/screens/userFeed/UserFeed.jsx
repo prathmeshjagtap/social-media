@@ -17,7 +17,7 @@ function UserFeed() {
 	const postData = sortPosts(sortBy, posts);
 
 	return (
-		<Box p="4" boxShadow="xl">
+		<Box p="4">
 			<AddPost />
 			{status === "loading" && <Loader />}
 			{status === "success" &&

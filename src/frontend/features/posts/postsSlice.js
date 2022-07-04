@@ -171,6 +171,7 @@ const deleteComment = createAsyncThunk(
 const addUpvote = createAsyncThunk(
 	"posts/addUpvote",
 	async ({ token, postId, commentId }) => {
+		console.log(token, postId, commentId);
 		const { data } = await axios.post(
 			`/api/comments/upvote/${postId}/${commentId}`,
 			{},
@@ -211,128 +212,134 @@ const postsSlice = createSlice({
 			state.bookmarksStatus = "idle";
 		},
 	},
-	extraReducers: (builder) => {
-		builder.addCase(getAllPosts.pending, (state) => {
+	extraReducers: {
+		[getAllPosts.pending]: (state) => {
 			state.status = "loading";
-		});
-		builder.addCase(getAllPosts.fulfilled, (state, { payload }) => {
+		},
+		[getAllPosts.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(getAllPosts.rejected, (state, { error }) => {
+		},
+		[getAllPosts.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(getSinglePost.pending, (state) => {
+		},
+		[getSinglePost.pending]: (state) => {
 			state.singlePostStatus = "loading";
-		});
-		builder.addCase(getSinglePost.fulfilled, (state, { payload }) => {
+		},
+		[getSinglePost.fulfilled]: (state, { payload }) => {
 			state.singlePost = payload.post;
 			state.singlePostStatus = "success";
-		});
-		builder.addCase(getSinglePost.rejected, (state, { error }) => {
+		},
+		[getSinglePost.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.singlePostStatus = "failed";
-		});
+		},
 
-		builder.addCase(addPost.fulfilled, (state, { payload }) => {
+		[addPost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(addPost.rejected, (state, { error }) => {
+		},
+		[addPost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(editPost.fulfilled, (state, { payload }) => {
+		},
+		[editPost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(editPost.rejected, (state, { error }) => {
+		},
+		[editPost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(deletePost.fulfilled, (state, { payload }) => {
+		},
+		[deletePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(deletePost.rejected, (state, { error }) => {
+		},
+		[deletePost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(likePost.fulfilled, (state, { payload }) => {
+		[likePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(likePost.rejected, (state, { error }) => {
+		},
+		[likePost.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
-		builder.addCase(dislikePost.fulfilled, (state, { payload }) => {
+		},
+		[dislikePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(dislikePost.rejected, (state, { error }) => {
+		},
+		[dislikePost.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(getBookmarks.pending, (state) => {
+		[getBookmarks.pending]: (state) => {
 			state.bookmarksStatus = "loading";
-		});
+		},
 
-		builder.addCase(getBookmarks.fulfilled, (state, { payload }) => {
+		[getBookmarks.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
 			state.bookmarksStatus = "success";
-		});
-		builder.addCase(getBookmarks.rejected, (state, { error }) => {
+		},
+		[getBookmarks.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.bookmarksStatus = "failed";
-		});
+		},
 
-		builder.addCase(addBookmark.fulfilled, (state, { payload }) => {
+		[addBookmark.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
-		});
-		builder.addCase(addBookmark.rejected, (state, { error }) => {
+		},
+		[addBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+			console.log(error);
+		},
 
-		builder.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
+		[deleteBookmark.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
-		});
-		builder.addCase(deleteBookmark.rejected, (state, { error }) => {
+		},
+		[deleteBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+			console.log(error);
+		},
 
-		builder.addCase(addComment.fulfilled, (state, { payload }) => {
+		[addComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addComment.rejected, (state, { error }) => {
+		},
+		[addComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(editComment.fulfilled, (state, { payload }) => {
+		[editComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(editComment.rejected, (state, { error }) => {
+		},
+		[editComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
-		builder.addCase(deleteComment.fulfilled, (state, { payload }) => {
+		},
+		[deleteComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(deleteComment.rejected, (state, { error }) => {
+		},
+		[deleteComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(addUpvote.fulfilled, (state, { payload }) => {
+		[addUpvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addUpvote.rejected, (state, { error }) => {
+			console.log(payload);
+		},
+		[addUpvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+			console.log(error);
+		},
 
-		builder.addCase(addDownvote.fulfilled, (state, { payload }) => {
+		[addDownvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addDownvote.rejected, (state, { error }) => {
+			console.log(payload);
+		},
+		[addDownvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+			console.log(error);
+		},
 	},
 });
 

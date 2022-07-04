@@ -9,6 +9,7 @@ import {
 	Avatar,
 	Icon,
 	Select,
+	useColorModeValue,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, followUser, sortPosts } from "../features";
@@ -38,6 +39,7 @@ function RightSideBar() {
 			top="100px"
 			minW="300px"
 			h="fit-content"
+			bg={useColorModeValue("gray.100", "whiteAlpha.200")}
 			display={{ base: "none", md: "none", lg: "none", xl: "block" }}
 			p="2"
 		>

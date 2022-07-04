@@ -14,7 +14,7 @@ function Explore() {
 	}, [dispatch, status]);
 
 	return (
-		<Box p="4" boxShadow="xl">
+		<Box p="4">
 			{status === "loading" && <Loader />}
 			{status === "success" &&
 				posts.map((post) => <Posts key={post.id} post={post} />)}

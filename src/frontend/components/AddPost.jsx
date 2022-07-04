@@ -4,11 +4,12 @@ import {
 	Flex,
 	Textarea,
 	Avatar,
-	Icon,
 	Button,
 	useDisclosure,
+	CircularProgress,
+	CircularProgressLabel,
 } from "@chakra-ui/react";
-import { BiPhotoAlbum } from "react-icons/bi";
+// import { BiPhotoAlbum } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../features";
 
@@ -50,16 +51,37 @@ function AddPost({ close }) {
 					name="content"
 					onChange={handleChange}
 				/>
-				<Flex justifyContent="space-between" px="4">
-					<Icon
+				<Flex justifyContent="flex-end" px="4">
+					{/* <Icon
 						as={BiPhotoAlbum}
 						w="6"
 						h="6"
 						alignItems="center"
 						cursor="pointer"
-					/>
-
-					<Button onClick={() => addpost(token, createPost)}>Post</Button>
+					/> */}
+					{createPost?.content?.length > 0 ? (
+						<CircularProgress
+							value={createPost.content.length * (5 / 6)}
+							color={createPost.content.length > 120 ? "red.400" : "green.400"}
+						>
+							<CircularProgressLabel
+								color={createPost.content.length > 120 ? "red" : "black"}
+							>
+								{120 - createPost.content.length}
+							</CircularProgressLabel>
+						</CircularProgress>
+					) : null}
+					<Button
+						onClick={() => addpost(token, createPost)}
+						isDisabled={
+							createPost.content.length === 0 || createPost.content.length > 120
+						}
+						bg="blue.400"
+						color="white"
+						ml="2"
+					>
+						Post
+					</Button>
 				</Flex>
 			</Box>
 		</Flex>
