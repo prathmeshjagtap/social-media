@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import {
 	Input,
@@ -20,6 +20,8 @@ function RightSideBar() {
 	const allusers = useSelector((state) => state.user.allusers);
 	const currentUser = useSelector((state) => state.auth.user);
 	const token = useSelector((state) => state.auth.token);
+	const [isSearch, setIsSearch] = useState(false);
+	const [searchResult, setSearchResult] = useState([]);
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, [dispatch]);
@@ -31,6 +33,22 @@ function RightSideBar() {
 				)
 		)
 		.filter((item) => item?.username !== currentUser?.username);
+
+	const searchedUsers = (inputValue) => {
+		if (inputValue !== "") {
+			setIsSearch(true);
+			setSearchResult(
+				allusers.filter(
+					(user) =>
+						user.username.toLowerCase().includes(inputValue.toLowerCase()) ||
+						user.firstName.toLowerCase().includes(inputValue.toLowerCase()) ||
+						user.lastName.toLowerCase().includes(inputValue.toLowerCase())
+				)
+			);
+		} else {
+			setIsSearch(false);
+		}
+	};
 
 	return (
 		<Box
@@ -57,8 +75,42 @@ function RightSideBar() {
 					border="none"
 					outline="none"
 					focusBorderColor="transparent"
+					onChange={(e) => searchedUsers(e.target.value)}
 				/>
 			</Flex>
+
+			{isSearch ? (
+				<Box>
+					{searchResult.length > 0 ? (
+						searchResult?.map((user) => {
+							return (
+								<Box p="2" key={user?._id}>
+									<Flex gap="2" justifyContent="space-between">
+										<Link to={`/profile/${user?.username}`} key={user?._id}>
+											<Flex alignItems="center" gap="1">
+												<Avatar
+													size="sm"
+													name={`${user?.firstName}  ${user?.lastName}`}
+													src={user?.avatarURL}
+												/>
+												<Box>
+													<Text>
+														{user?.firstName} {user?.lastName}
+													</Text>
+													<Text>@{user?.username}</Text>
+												</Box>
+											</Flex>
+										</Link>
+									</Flex>
+								</Box>
+							);
+						})
+					) : (
+						<Text p="2">User not found</Text>
+					)}
+				</Box>
+			) : null}
+
 			<Box>
 				<Text m="2">Sort Posts</Text>
 				<Select
