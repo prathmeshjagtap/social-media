@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { followUser, unfollowUser } from "../user/userSlice";
 
 const initialState = {
 	token: localStorage.getItem("token") ?? null,
@@ -76,6 +77,18 @@ const authSlice = createSlice({
 		[signup.rejected]: (state, { payload }) => {
 			state.status = "rejected";
 			state.error = payload.errors;
+		},
+		[followUser.fulfilled]: (state, { payload }) => {
+			state.user = payload.currentUser;
+		},
+		[followUser.rejected]: (state, { error }) => {
+			state.error = error.message;
+		},
+		[unfollowUser.fulfilled]: (state, { payload }) => {
+			state.user = payload.currentUser;
+		},
+		[unfollowUser.rejected]: (state, { error }) => {
+			state.error = error.message;
 		},
 	},
 });

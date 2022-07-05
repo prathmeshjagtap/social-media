@@ -171,7 +171,6 @@ const deleteComment = createAsyncThunk(
 const addUpvote = createAsyncThunk(
 	"posts/addUpvote",
 	async ({ token, postId, commentId }) => {
-		console.log(token, postId, commentId);
 		const { data } = await axios.post(
 			`/api/comments/upvote/${postId}/${commentId}`,
 			{},
@@ -292,7 +291,6 @@ const postsSlice = createSlice({
 		},
 		[addBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-			console.log(error);
 		},
 
 		[deleteBookmark.fulfilled]: (state, { payload }) => {
@@ -300,7 +298,6 @@ const postsSlice = createSlice({
 		},
 		[deleteBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-			console.log(error);
 		},
 
 		[addComment.fulfilled]: (state, { payload }) => {
@@ -325,20 +322,16 @@ const postsSlice = createSlice({
 
 		[addUpvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-			console.log(payload);
 		},
 		[addUpvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-			console.log(error);
 		},
 
 		[addDownvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-			console.log(payload);
 		},
 		[addDownvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-			console.log(error);
 		},
 	},
 });

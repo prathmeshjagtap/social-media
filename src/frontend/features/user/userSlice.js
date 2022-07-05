@@ -107,7 +107,6 @@ const userSlice = createSlice({
 		[updateUser.rejected]: (state, { error }) => {
 			state.error = error.message;
 		},
-
 		[followUser.fulfilled]: (state, { payload }) => {
 			state.allusers = payload.users;
 		},
