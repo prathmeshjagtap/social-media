@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { AddPost, Loader, Posts } from "../../components";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Flex, Select } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../../features";
+import { getAllPosts, sortData } from "../../features";
 import { sortPosts, filterUserFeedPost } from "../../helpers";
 
 function UserFeed() {
@@ -20,6 +20,20 @@ function UserFeed() {
 	const userFeedPost = filterUserFeedPost(user, postData);
 	return (
 		<Box p="4">
+			<Box display={{ base: "block", xl: "none" }} mx="4">
+				<Flex justifyContent="space-between">
+					<Text fontWeight="medium" fontSize="lg">
+						Feed
+					</Text>
+					<Box>
+						<Select onChange={(e) => dispatch(sortData(e.target.value))}>
+							<option value="trending">Trending</option>
+							<option value="newest">Newest First</option>
+							<option value="oldest">Oldest First</option>
+						</Select>
+					</Box>
+				</Flex>
+			</Box>
 			<AddPost />
 			{status === "loading" && <Loader />}
 			{status === "success" &&

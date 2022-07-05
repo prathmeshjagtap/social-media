@@ -10,7 +10,7 @@ const initialState = {
 	userPost: null,
 	bookmarks: [],
 	bookmarksStatus: "idle",
-	sortBy: "newest",
+	sortBy: "trending",
 };
 
 const getAllPosts = createAsyncThunk("posts/getAllPosts", async () => {
@@ -204,7 +204,7 @@ const postsSlice = createSlice({
 			state.singlePost = null;
 			state.singlePostStatus = "idle";
 		},
-		sortPosts: (state, action) => {
+		sortData: (state, action) => {
 			state.sortBy = action.payload;
 		},
 		unsuscribeBookmark: (state) => {
@@ -354,5 +354,5 @@ export {
 	addDownvote,
 };
 export const postreducer = postsSlice.reducer;
-export const { unsuscribeSinglePost, unsuscribeBookmark, sortPosts } =
+export const { unsuscribeSinglePost, unsuscribeBookmark, sortData } =
 	postsSlice.actions;

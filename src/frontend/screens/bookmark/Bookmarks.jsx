@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookmarks, unsuscribeBookmark } from "../../features";
 import { Posts, Loader } from "../../components";
 import { Box, Text } from "@chakra-ui/react";
+import { sortPosts } from "../../helpers";
 
 function Bookmarks() {
-	const { bookmarks, bookmarksStatus, posts } = useSelector(
+	const { bookmarks, bookmarksStatus, posts, sortBy } = useSelector(
 		(state) => state.posts
 	);
 	const { token } = useSelector((state) => state.auth);
@@ -16,9 +17,11 @@ function Bookmarks() {
 		return () => dispatch(unsuscribeBookmark());
 	}, [token, dispatch]);
 
-	const bookmarkPosts = posts.filter((post) =>
+	const filterBookmarkedPosts = posts.filter((post) =>
 		bookmarks.find((item) => post._id === item._id)
 	);
+
+	const bookmarkPosts = sortPosts(sortBy, filterBookmarkedPosts);
 	return (
 		<Box>
 			{bookmarksStatus === "loading" && <Loader />}

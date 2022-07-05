@@ -12,11 +12,10 @@ import {
 	useColorModeValue,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, followUser, sortPosts } from "../features";
-import { Link, useLocation } from "react-router-dom";
+import { getAllUsers, followUser, sortData } from "../features";
+import { Link } from "react-router-dom";
 
 function RightSideBar() {
-	const location = useLocation();
 	const dispatch = useDispatch();
 	const allusers = useSelector((state) => state.user.allusers);
 	const currentUser = useSelector((state) => state.auth.user);
@@ -60,31 +59,18 @@ function RightSideBar() {
 					focusBorderColor="transparent"
 				/>
 			</Flex>
-			{location?.pathname === "/userFeed" && (
-				<Box>
-					<Text m="2">Sort by</Text>
-					<Button
-						bg={"red.400"}
-						color={"white"}
-						_hover={{
-							bg: "red.500",
-						}}
-						w="100%"
-						my="2"
-						onClick={() => dispatch(sortPosts("trending"))}
-					>
-						Trending Post
-					</Button>
-					<Select
-						onChange={(e) => dispatch(sortPosts(e.target.value))}
-						placeholder="Sort by Date"
-					>
-						<option value="newest">Newest First</option>
-						<option value="oldest">Oldest First</option>
-					</Select>
-				</Box>
-			)}
-
+			<Box>
+				<Text m="2">Sort Posts</Text>
+				<Select
+					onChange={(e) => dispatch(sortData(e.target.value))}
+					backgroundColor="red.400"
+					focusBorderColor="red.400"
+				>
+					<option value="trending">Trending</option>
+					<option value="newest">Newest First</option>
+					<option value="oldest">Oldest First</option>
+				</Select>
+			</Box>
 			{toFollowUsers?.length > 0 ? (
 				<Text mt="4" mb="2" fontWeight="bold">
 					New Users to Follow
