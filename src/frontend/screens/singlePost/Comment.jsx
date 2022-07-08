@@ -129,7 +129,7 @@ function Comment({ comment, postId }) {
 							</Flex>
 						</>
 					)}
-					<Flex gap="4" px="4">
+					{/* <Flex gap="4" px="4">
 						{comment?.votes?.upvotedBy.find(
 							(item) => item.username === user.username
 						) ? (
@@ -201,7 +201,7 @@ function Comment({ comment, postId }) {
 								<Text mx="1">{comment?.votes?.downvotedBy.length}</Text>
 							</Flex>
 						)}
-					</Flex>
+					</Flex> */}
 				</Box>
 			</Flex>
 		</Box>

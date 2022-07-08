@@ -18,6 +18,7 @@ import {
 	MenuDivider,
 	MenuItem,
 	MenuList,
+	Link,
 } from "@chakra-ui/react";
 import {
 	FiHome,
@@ -28,7 +29,7 @@ import {
 	FiChevronDown,
 } from "react-icons/fi";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features";
 
@@ -56,8 +57,8 @@ function Header() {
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
-	const navigate = useNavigate();
 	const user = useSelector((state) => state.auth.user);
+	const navigate = useNavigate();
 	const LinkItems = [
 		{ name: "user Feed", icon: FiHome, Link: "/userFeed" },
 		{ name: "Explore", icon: FiCompass, Link: "/explore" },
@@ -69,7 +70,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			transition="3s ease"
 			bg={useColorModeValue("white", "gray.900")}
 			borderRight="1px"
-			borderRightColor={useColorModeValue("gray.200", "gray.700")}
+			borderRightColor={useColorModeValue("gray.200", "gray.200")}
 			w={{ base: "full", md: 60 }}
 			pos="sticky"
 			top="0"
@@ -82,6 +83,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
 					fontFamily="monospace"
 					fontWeight="bold"
 					textColor="blue.400"
+					cursor="pointer"
+					onClick={() => navigate("/userFeed")}
 				>
 					Connectier
 				</Text>
@@ -91,7 +94,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
 				<NavItem
 					key={link.name}
 					icon={link.icon}
-					onClick={() => navigate(link.Link)}
+					path={link.Link}
+					onClose={onClose}
 				>
 					{link.name}
 				</NavItem>
@@ -100,33 +104,73 @@ const SidebarContent = ({ onClose, ...rest }) => {
 	);
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, children, path, onClose, ...rest }) => {
 	return (
-		<Flex
-			align="center"
-			p="4"
-			mx="4"
-			borderRadius="lg"
-			role="group"
-			cursor="pointer"
-			_hover={{
-				bg: "cyan.400",
-				color: "white",
-			}}
-			{...rest}
+		<Link
+			as={NavLink}
+			to={path}
+			style={{ textDecoration: "none" }}
+			_focus={{ boxShadow: "none" }}
+			onClick={onClose}
 		>
-			{icon && (
-				<Icon
-					mr="4"
-					fontSize="16"
-					_groupHover={{
-						color: "white",
-					}}
-					as={icon}
-				/>
-			)}
-			{children}
-		</Flex>
+			{({ isActive }) =>
+				isActive ? (
+					<Flex
+						align="center"
+						p="4"
+						mx="4"
+						borderRadius="lg"
+						role="group"
+						cursor="pointer"
+						bg="blue.400"
+						color="white"
+						_hover={{
+							bg: "blue.200",
+							color: "white",
+						}}
+						{...rest}
+					>
+						{icon && (
+							<Icon
+								mr="4"
+								fontSize="16"
+								_groupHover={{
+									color: "white",
+								}}
+								as={icon}
+							/>
+						)}
+						{children}
+					</Flex>
+				) : (
+					<Flex
+						align="center"
+						p="4"
+						mx="4"
+						borderRadius="lg"
+						role="group"
+						cursor="pointer"
+						_hover={{
+							bg: "blue.200",
+							color: "white",
+						}}
+						{...rest}
+					>
+						{icon && (
+							<Icon
+								mr="4"
+								fontSize="16"
+								_groupHover={{
+									color: "white",
+								}}
+								as={icon}
+							/>
+						)}
+						{children}
+					</Flex>
+				)
+			}
+		</Link>
 	);
 };
 
@@ -145,9 +189,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
 			px={{ base: 4, md: 4 }}
 			height="20"
 			borderBottomWidth="1px"
-			borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+			borderBottomColor={useColorModeValue("gray.200", "gray.900")}
 			{...rest}
-			bg={useColorModeValue("gray.100", "gray.900")}
+			bg={useColorModeValue("gray.100", "gray.700")}
 		>
 			<Text
 				fontSize="2xl"
@@ -156,6 +200,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
 				display={{ base: "none", md: "block" }}
 				ml="4"
 				textColor="blue.400"
+				cursor="pointer"
+				onClick={() => navigate("/userFeed")}
 			>
 				Connectier
 			</Text>

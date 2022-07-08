@@ -25,14 +25,6 @@ export const users = [
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
 			},
-			{
-				_id: uuid(),
-				firstName: "Leo",
-				lastName: "Messi",
-				username: "messi",
-				avatarURL:
-					"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
-			},
 		],
 		followers: [
 			{
@@ -42,14 +34,6 @@ export const users = [
 				username: "elonmusk",
 				avatarURL:
 					"https://pbs.twimg.com/profile_images/1521957986335297536/itVSA7l0_400x400.jpg",
-			},
-			{
-				_id: uuid(),
-				firstName: "Leo",
-				lastName: "Messi",
-				username: "messi",
-				avatarURL:
-					"https://pbs.twimg.com/profile_images/1491724635141914624/I9W3dn4I_400x400.jpg",
 			},
 		],
 		bookmarks: [],
@@ -120,14 +104,6 @@ export const users = [
 		following: [
 			{
 				_id: uuid(),
-				firstName: "Prathmesh",
-				lastName: "Jagtap",
-				username: "prathmesh",
-				avatarURL:
-					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
-			},
-			{
-				_id: uuid(),
 				firstName: "Elon",
 				lastName: "Musk",
 				username: "elonmusk",
@@ -136,14 +112,6 @@ export const users = [
 			},
 		],
 		followers: [
-			{
-				_id: uuid(),
-				firstName: "Prathmesh",
-				lastName: "Jagtap",
-				username: "prathmesh",
-				avatarURL:
-					"https://pbs.twimg.com/profile_images/1511020219250376713/zFRXcl9k_400x400.jpg",
-			},
 			{
 				_id: uuid(),
 				firstName: "Elon",

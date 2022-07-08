@@ -52,6 +52,11 @@ function Login() {
 				align={"center"}
 				justify={"center"}
 				bg={useColorModeValue("gray.50", "gray.800")}
+				as={"form"}
+				onSubmit={(e) => {
+					e.preventDefault();
+					loginHandler(userDetail.username, userDetail.password);
+				}}
 			>
 				<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
 					<Stack align={"center"}>
@@ -114,9 +119,7 @@ function Login() {
 									_hover={{
 										bg: "blue.500",
 									}}
-									onClick={() =>
-										loginHandler(userDetail.username, userDetail.password)
-									}
+									type="submit"
 								>
 									Sign in
 								</Button>

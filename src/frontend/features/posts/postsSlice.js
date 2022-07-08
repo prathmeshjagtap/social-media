@@ -10,15 +10,15 @@ const initialState = {
 	userPost: null,
 	bookmarks: [],
 	bookmarksStatus: "idle",
-	sortBy: "newest",
+	sortBy: "trending",
 };
 
-const getAllPosts = createAsyncThunk("/posts/getAllPosts ", async () => {
+const getAllPosts = createAsyncThunk("posts/getAllPosts", async () => {
 	const { data } = await axios.get("/api/posts");
 	return data;
 });
 const getSinglePost = createAsyncThunk(
-	"/posts/getSinglePost ",
+	"posts/getSinglePost",
 	async (postId) => {
 		const { data } = await axios.get(`/api/posts/${postId}`);
 		return data;
@@ -26,7 +26,7 @@ const getSinglePost = createAsyncThunk(
 );
 
 const addPost = createAsyncThunk(
-	"/posts/addPost ",
+	"posts/addPost",
 	async ({ token, postData }) => {
 		const { data } = await axios.post(
 			"/api/posts",
@@ -38,7 +38,7 @@ const addPost = createAsyncThunk(
 );
 
 const editPost = createAsyncThunk(
-	"/posts/editPost ",
+	"posts/editPost",
 	async ({ token, postId, postData }) => {
 		const { data } = await axios.post(
 			`/api/posts/edit/${postId}`,
@@ -50,7 +50,7 @@ const editPost = createAsyncThunk(
 );
 
 const deletePost = createAsyncThunk(
-	"/posts/deletePost ",
+	"posts/deletePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.delete(`/api/posts/${postId}`, {
 			headers: { authorization: token },
@@ -60,7 +60,7 @@ const deletePost = createAsyncThunk(
 );
 
 const likePost = createAsyncThunk(
-	"/posts/likePost ",
+	"posts/likePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/posts/like/${postId}`,
@@ -74,7 +74,7 @@ const likePost = createAsyncThunk(
 );
 
 const dislikePost = createAsyncThunk(
-	"/posts/dislikePost ",
+	"posts/dislikePost",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/posts/dislike/${postId}`,
@@ -88,7 +88,7 @@ const dislikePost = createAsyncThunk(
 );
 
 const addBookmark = createAsyncThunk(
-	"/posts/addBookmark ",
+	"posts/addBookmark",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/users/bookmark/${postId}`,
@@ -102,7 +102,7 @@ const addBookmark = createAsyncThunk(
 );
 
 const deleteBookmark = createAsyncThunk(
-	"/posts/deleteBookmark ",
+	"posts/deleteBookmark",
 	async ({ token, postId }) => {
 		const { data } = await axios.post(
 			`/api/users/remove-bookmark/${postId}`,
@@ -115,7 +115,7 @@ const deleteBookmark = createAsyncThunk(
 	}
 );
 
-const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
+const getBookmarks = createAsyncThunk("posts/getBookmarks ", async (token) => {
 	const { data } = await axios.get("/api/users/bookmark", {
 		headers: { authorization: token },
 	});
@@ -123,7 +123,7 @@ const getBookmarks = createAsyncThunk("/posts/getBookmarks ", async (token) => {
 });
 
 const addComment = createAsyncThunk(
-	"/posts/addComment ",
+	"posts/addComment",
 	async ({ token, postId, commentData }) => {
 		const { data } = await axios.post(
 			`/api/comments/add/${postId}`,
@@ -139,7 +139,7 @@ const addComment = createAsyncThunk(
 );
 
 const editComment = createAsyncThunk(
-	"/posts/editComment ",
+	"posts/editComment",
 	async ({ token, postId, commentId, commentData }) => {
 		const { data } = await axios.post(
 			`/api/comments/edit/${postId}/${commentId}`,
@@ -155,7 +155,7 @@ const editComment = createAsyncThunk(
 );
 
 const deleteComment = createAsyncThunk(
-	"/posts/deleteComment ",
+	"posts/deleteComment",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/delete/${postId}/${commentId}`,
@@ -169,7 +169,7 @@ const deleteComment = createAsyncThunk(
 );
 
 const addUpvote = createAsyncThunk(
-	"/posts/addUpvote ",
+	"posts/addUpvote",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/upvote/${postId}/${commentId}`,
@@ -183,7 +183,7 @@ const addUpvote = createAsyncThunk(
 );
 
 const addDownvote = createAsyncThunk(
-	"/posts/addDownvote ",
+	"posts/addDownvote",
 	async ({ token, postId, commentId }) => {
 		const { data } = await axios.post(
 			`/api/comments/downvote/${postId}/${commentId}`,
@@ -204,135 +204,135 @@ const postsSlice = createSlice({
 			state.singlePost = null;
 			state.singlePostStatus = "idle";
 		},
-		sortPosts: (state, action) => {
+		sortData: (state, action) => {
 			state.sortBy = action.payload;
 		},
 		unsuscribeBookmark: (state) => {
 			state.bookmarksStatus = "idle";
 		},
 	},
-	extraReducers: (builder) => {
-		builder.addCase(getAllPosts.pending, (state) => {
+	extraReducers: {
+		[getAllPosts.pending]: (state) => {
 			state.status = "loading";
-		});
-		builder.addCase(getAllPosts.fulfilled, (state, { payload }) => {
+		},
+		[getAllPosts.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(getAllPosts.rejected, (state, { error }) => {
+		},
+		[getAllPosts.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(getSinglePost.pending, (state) => {
+		},
+		[getSinglePost.pending]: (state) => {
 			state.singlePostStatus = "loading";
-		});
-		builder.addCase(getSinglePost.fulfilled, (state, { payload }) => {
+		},
+		[getSinglePost.fulfilled]: (state, { payload }) => {
 			state.singlePost = payload.post;
 			state.singlePostStatus = "success";
-		});
-		builder.addCase(getSinglePost.rejected, (state, { error }) => {
+		},
+		[getSinglePost.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.singlePostStatus = "failed";
-		});
+		},
 
-		builder.addCase(addPost.fulfilled, (state, { payload }) => {
+		[addPost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(addPost.rejected, (state, { error }) => {
+		},
+		[addPost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(editPost.fulfilled, (state, { payload }) => {
+		},
+		[editPost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(editPost.rejected, (state, { error }) => {
+		},
+		[editPost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
-		builder.addCase(deletePost.fulfilled, (state, { payload }) => {
+		},
+		[deletePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
 			state.status = "success";
-		});
-		builder.addCase(deletePost.rejected, (state, { error }) => {
+		},
+		[deletePost.rejected]: (state, { error }) => {
 			state.status = "failed";
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(likePost.fulfilled, (state, { payload }) => {
+		[likePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(likePost.rejected, (state, { error }) => {
+		},
+		[likePost.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
-		builder.addCase(dislikePost.fulfilled, (state, { payload }) => {
+		},
+		[dislikePost.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(dislikePost.rejected, (state, { error }) => {
+		},
+		[dislikePost.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(getBookmarks.pending, (state) => {
+		[getBookmarks.pending]: (state) => {
 			state.bookmarksStatus = "loading";
-		});
+		},
 
-		builder.addCase(getBookmarks.fulfilled, (state, { payload }) => {
+		[getBookmarks.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
 			state.bookmarksStatus = "success";
-		});
-		builder.addCase(getBookmarks.rejected, (state, { error }) => {
+		},
+		[getBookmarks.rejected]: (state, { error }) => {
 			state.error = error.message;
 			state.bookmarksStatus = "failed";
-		});
+		},
 
-		builder.addCase(addBookmark.fulfilled, (state, { payload }) => {
+		[addBookmark.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
-		});
-		builder.addCase(addBookmark.rejected, (state, { error }) => {
+		},
+		[addBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
+		[deleteBookmark.fulfilled]: (state, { payload }) => {
 			state.bookmarks = payload.bookmarks;
-		});
-		builder.addCase(deleteBookmark.rejected, (state, { error }) => {
+		},
+		[deleteBookmark.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(addComment.fulfilled, (state, { payload }) => {
+		[addComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addComment.rejected, (state, { error }) => {
+		},
+		[addComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(editComment.fulfilled, (state, { payload }) => {
+		[editComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(editComment.rejected, (state, { error }) => {
+		},
+		[editComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
-		builder.addCase(deleteComment.fulfilled, (state, { payload }) => {
+		},
+		[deleteComment.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(deleteComment.rejected, (state, { error }) => {
+		},
+		[deleteComment.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(addUpvote.fulfilled, (state, { payload }) => {
+		[addUpvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addUpvote.rejected, (state, { error }) => {
+		},
+		[addUpvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 
-		builder.addCase(addDownvote.fulfilled, (state, { payload }) => {
+		[addDownvote.fulfilled]: (state, { payload }) => {
 			state.posts = payload.posts;
-		});
-		builder.addCase(addDownvote.rejected, (state, { error }) => {
+		},
+		[addDownvote.rejected]: (state, { error }) => {
 			state.error = error.message;
-		});
+		},
 	},
 });
 
@@ -354,5 +354,5 @@ export {
 	addDownvote,
 };
 export const postreducer = postsSlice.reducer;
-export const { unsuscribeSinglePost, unsuscribeBookmark, sortPosts } =
+export const { unsuscribeSinglePost, unsuscribeBookmark, sortData } =
 	postsSlice.actions;

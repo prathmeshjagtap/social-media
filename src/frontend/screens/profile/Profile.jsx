@@ -5,11 +5,11 @@ import { clearUser, getSingleUser, getUserPosts } from "../../features";
 import { Posts } from "../../components";
 import { ProfileHeader } from "./ProfileHeader";
 import { Flex, Box } from "@chakra-ui/react";
-
+import { sortPosts } from "../../helpers";
 function Profile() {
 	const { username } = useParams();
 	const { userPosts, allusers } = useSelector((state) => state.user);
-	const { posts } = useSelector((state) => state.posts);
+	const { posts, sortBy } = useSelector((state) => state.posts);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUserPosts(username));
@@ -21,11 +21,12 @@ function Profile() {
 		return () => dispatch(clearUser());
 	}, [dispatch, username, allusers]);
 
+	const profilePosts = sortPosts(sortBy, userPosts);
 	return (
 		<Box>
 			<ProfileHeader />
 			<Flex mt="200px" gap="2" flexDirection="column" p="4">
-				{userPosts?.map((post) => (
+				{profilePosts?.map((post) => (
 					<Posts key={post.id} post={post} />
 				))}
 			</Flex>

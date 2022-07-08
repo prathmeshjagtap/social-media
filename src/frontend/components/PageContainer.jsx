@@ -16,9 +16,9 @@ function PageContainer({ page }) {
 					<SideBar />
 					<Box
 						width="100%"
-						bg="blackAlpha.100"
 						maxW="700px"
 						minW={{ base: "300px", md: "700px" }}
+						boxShadow="xl"
 					>
 						{page}
 					</Box>

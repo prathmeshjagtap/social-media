@@ -3,7 +3,6 @@ import {
 	BiHeart,
 	BiComment,
 	BiBookmark,
-	BiShareAlt,
 	BiDotsVerticalRounded,
 	BiEdit,
 } from "react-icons/bi";
@@ -48,7 +47,7 @@ function Posts({ post }) {
 	const { user, token } = useSelector((state) => state.auth);
 	const { bookmarks } = useSelector((state) => state.posts);
 	return (
-		<Box boxShadow="xl" my="4">
+		<Box my="4" borderBottom="1px">
 			<Flex gap="2" p="4">
 				<Avatar
 					size="sm"
@@ -145,13 +144,6 @@ function Posts({ post }) {
 							/>
 							<Text mx="1">{post?.comments.length}</Text>
 						</Flex>
-						<Icon
-							as={BiShareAlt}
-							w="6"
-							h="6"
-							alignItems="center"
-							cursor="pointer"
-						/>
 						{bookmarks.find((item) => item._id === post._id) ? (
 							<Icon
 								as={BsBookmarkFill}
