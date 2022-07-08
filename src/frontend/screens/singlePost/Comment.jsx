@@ -15,14 +15,14 @@ import {
 import {
 	BiDotsVerticalRounded,
 	BiEdit,
-	BiUpvote,
-	BiDownvote,
+	// BiUpvote,
+	// BiDownvote,
 } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	addDownvote,
-	addUpvote,
+	// addDownvote,
+	// addUpvote,
 	deleteComment,
 	editComment,
 } from "../../features";
