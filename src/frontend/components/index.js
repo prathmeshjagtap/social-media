@@ -7,3 +7,5 @@ export { PageContainer } from "./PageContainer";
 export { Loader } from "./Loader";
 export { AddPost } from "./AddPost";
 export { EditPost } from "./EditPost";
+export { SimpleHeader } from "./SimpleHeader";
+export { Footer } from "./Footer";
