@@ -17,7 +17,7 @@ import {
 	Link,
 } from "@chakra-ui/react";
 import { FiHome, FiCompass, FiStar, FiUser } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link as ReachLink } from "react-router-dom";
 import { AddPost } from "./AddPost";
 import { useSelector } from "react-redux";
 
@@ -67,7 +67,7 @@ function SideBar() {
 						</Button>
 					</Box>
 				</Box>
-				<Link to={`/profile/${user?.username}`}>
+				<Link as={ReachLink} to={`/profile/${user?.username}`}>
 					<Box px="6" position="absolute" bottom="4" w="100%" pointer="cursor">
 						<Flex gap="2" alignItems="center">
 							<Avatar size="sm" name={user?.username} src={user?.avatarURL} />
