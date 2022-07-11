@@ -5,7 +5,6 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
-	Checkbox,
 	Stack,
 	Link,
 	Button,
@@ -105,14 +104,14 @@ function Login() {
 							</FormControl>
 							{error && <Text color={"red"}>{error}</Text>}
 							<Stack spacing={10}>
-								<Stack
+								{/* <Stack
 									direction={{ base: "column", sm: "row" }}
 									align={"start"}
 									justify={"space-between"}
 								>
 									<Checkbox>Remember me</Checkbox>
 									<Link color={"blue.400"}>Forgot password?</Link>
-								</Stack>
+								</Stack> */}
 								<Button
 									bg={"blue.400"}
 									color={"white"}
