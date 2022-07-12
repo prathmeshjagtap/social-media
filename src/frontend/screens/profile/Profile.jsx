@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { clearUser, getSingleUser, getUserPosts } from "../../features";
 import { Posts } from "../../components";
 import { ProfileHeader } from "./ProfileHeader";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Center } from "@chakra-ui/react";
 import { sortPosts } from "../../helpers";
 function Profile() {
 	const { username } = useParams();
@@ -26,9 +26,11 @@ function Profile() {
 		<Box>
 			<ProfileHeader />
 			<Flex mt="200px" gap="2" flexDirection="column" p="4">
-				{profilePosts?.map((post) => (
-					<Posts key={post.id} post={post} />
-				))}
+				{profilePosts.length > 0 ? (
+					profilePosts?.map((post) => <Posts key={post.id} post={post} />)
+				) : (
+					<Center h="100px">you have zero posts, share what's happening</Center>
+				)}
 			</Flex>
 		</Box>
 	);

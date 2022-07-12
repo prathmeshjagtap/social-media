@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Link as ReachLink, Navigate } from "react-router-dom";
 import {
 	Flex,
 	Container,
@@ -12,13 +12,13 @@ import {
 	SimpleGrid,
 	StackDivider,
 	Icon,
+	Link,
 } from "@chakra-ui/react";
 import { SimpleHeader, Footer } from "../../components";
 import { BsCheck, BsHeartFill, BsPeople } from "react-icons/bs";
 import { Testimonials } from "./Testimonials";
 
 function Home() {
-	const navigate = useNavigate();
 	const { token } = useSelector((state) => state.auth);
 
 	const Feature = ({ text, icon, iconBg }) => {
@@ -67,19 +67,22 @@ function Home() {
 						world with Connectier
 					</Text>
 					<Stack spacing={6} direction={"row"}>
-						<Button
-							rounded={"full"}
-							px={6}
-							colorScheme={"blue"}
-							bg={"blue.400"}
-							_hover={{ bg: "blue.500" }}
-							onClick={() => navigate("/singup")}
-						>
-							Get started
-						</Button>
-						<Button rounded={"full"} px={6} onClick={() => navigate("/login")}>
-							Login
-						</Button>
+						<Link as={ReachLink} to="/signup">
+							<Button
+								rounded={"full"}
+								px={6}
+								colorScheme={"blue"}
+								bg={"blue.400"}
+								_hover={{ bg: "blue.500" }}
+							>
+								Get started
+							</Button>
+						</Link>
+						<Link as={ReachLink} to="/login">
+							<Button rounded={"full"} px={6}>
+								Login
+							</Button>
+						</Link>
 					</Stack>
 					<Flex w={"full"} alignItems="center" justifyContent="center">
 						<Image

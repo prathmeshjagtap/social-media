@@ -180,7 +180,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 	const user = useSelector((state) => state.auth.user);
 	const logoutHandler = () => {
 		dispatch(logout());
-		navigate("/login");
+		navigate("/");
 	};
 	return (
 		<Flex

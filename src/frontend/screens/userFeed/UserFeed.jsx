@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { AddPost, Loader, Posts } from "../../components";
-import { Box, Text, Flex, Select } from "@chakra-ui/react";
+import { Box, Text, Flex, Select, Center } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts, sortData } from "../../features";
 import { sortPosts, filterUserFeedPost } from "../../helpers";
@@ -36,8 +36,11 @@ function UserFeed() {
 			</Box>
 			<AddPost />
 			{status === "loading" && <Loader />}
-			{status === "success" &&
-				userFeedPost.map((post) => <Posts key={post.id} post={post} />)}
+			{status === "success" && userFeedPost.length > 0 ? (
+				userFeedPost.map((post) => <Posts key={post.id} post={post} />)
+			) : (
+				<Center h="100px">Follow users to see their posts on feed</Center>
+			)}
 			{status === "failed" && (
 				<Text mt="5" textAlign="center" color="red.500" p="4">
 					Server Error Failed to load The data
